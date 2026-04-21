@@ -23,6 +23,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="./js/jquery.js"></script>
     <style>
+        /* ===== Particles Background ===== */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* Ensure all page elements sit above particles */
+        .page-top, .sidebar, .main {
+            position: relative;
+            z-index: 1;
+        }
+        .page-top { z-index: 3; }
+        .sidebar  { z-index: 4; }
+
         /* ===== Language Toggle ===== */
         .lang-toggle-btn {
             display: inline-flex;
@@ -263,6 +281,8 @@
 </head>
 
 <body id="body-root">
+    <!-- ===== Particles Background ===== -->
+    <div id="particles-js"></div>
     <!-- ===== Top Navigation ===== -->
     <div class="page-top animated fadeInDown">
         <div class="nav">
@@ -939,6 +959,57 @@
                 if (saved === 'zh') toggleLang();
             } catch(e) {}
         })();
+    </script>
+
+    <!-- ===== Particles.js (github.com/VincentGarreau/particles.js) ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 900 } },
+                color: { value: '#4786d6' },
+                shape: { type: 'circle' },
+                opacity: {
+                    value: 0.25,
+                    random: true,
+                    anim: { enable: true, speed: 0.6, opacity_min: 0.08, sync: false }
+                },
+                size: {
+                    value: 2.5,
+                    random: true,
+                    anim: { enable: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 140,
+                    color: '#4786d6',
+                    opacity: 0.12,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 0.8,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'grab' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 120, line_linked: { opacity: 0.35 } },
+                    push: { particles_nb: 3 }
+                }
+            },
+            retina_detect: true
+        });
     </script>
 </body>
 </html>
