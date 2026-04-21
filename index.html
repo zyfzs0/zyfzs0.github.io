@@ -1185,5 +1185,130 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         })();
     </script>
+    <!-- ===== Typewriter Effect on Name ===== -->
+    <script>
+        (function() {
+            const nameLink = document.querySelector('.title h3 a');
+            if (!nameLink) return;
+            const fullText = nameLink.textContent;
+            nameLink.textContent = '';
+            nameLink.style.borderRight = '2px solid #4786d6';
+            let i = 0;
+            const timer = setInterval(() => {
+                nameLink.textContent += fullText[i++];
+                if (i >= fullText.length) {
+                    clearInterval(timer);
+                    // Blink cursor then remove it
+                    let blink = 0;
+                    const cursor = setInterval(() => {
+                        nameLink.style.borderRight = (blink++ % 2 === 0)
+                            ? '2px solid transparent'
+                            : '2px solid #4786d6';
+                        if (blink > 5) { clearInterval(cursor); nameLink.style.borderRight = 'none'; }
+                    }, 400);
+                }
+            }, 90);
+        })();
+    </script>
+
+    <!-- ===== 3D Card Tilt on Hover ===== -->
+    <script>
+        (function() {
+            function addTilt(el) {
+                el.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease';
+                el.addEventListener('mousemove', function(e) {
+                    const rect = el.getBoundingClientRect();
+                    const cx = rect.left + rect.width  / 2;
+                    const cy = rect.top  + rect.height / 2;
+                    const dx = (e.clientX - cx) / (rect.width  / 2);
+                    const dy = (e.clientY - cy) / (rect.height / 2);
+                    const rotX = -dy * 5;
+                    const rotY =  dx * 5;
+                    el.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+                    el.style.boxShadow = `${-rotY*2}px ${rotX*2}px 24px rgba(71,134,214,0.15)`;
+                });
+                el.addEventListener('mouseleave', function() {
+                    el.style.transform = '';
+                    el.style.boxShadow = '';
+                });
+            }
+            document.querySelectorAll('.entry-block, .pub-entry').forEach(addTilt);
+        })();
+    </script>
+
+    <!-- ===== Konami Code Easter Egg (↑↑↓↓←→←→BA) ===== -->
+    <script>
+        (function() {
+            const CODE = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown',
+                          'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+            let pos = 0;
+            document.addEventListener('keydown', function(e) {
+                if (e.key === CODE[pos]) {
+                    pos++;
+                    if (pos === CODE.length) {
+                        pos = 0;
+                        fireKonami();
+                    }
+                } else { pos = 0; }
+            });
+
+            function fireKonami() {
+                const msg = document.createElement('div');
+                Object.assign(msg.style, {
+                    position: 'fixed', top: '50%', left: '50%',
+                    transform: 'translate(-50%,-50%) scale(0)',
+                    fontSize: '28px', fontWeight: '700',
+                    color: '#fff', background: 'linear-gradient(135deg,#4786d6,#7c5cbf)',
+                    padding: '18px 36px', borderRadius: '16px',
+                    zIndex: '99999', pointerEvents: 'none',
+                    boxShadow: '0 8px 32px rgba(71,134,214,0.4)',
+                    transition: 'transform 0.4s cubic-bezier(.34,1.56,.64,1)',
+                    textAlign: 'center', letterSpacing: '1px'
+                });
+                msg.innerHTML = '🎉 Konami Code Activated! 🎉<br><span style="font-size:14px;font-weight:400">You found the easter egg!</span>';
+                document.body.appendChild(msg);
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    msg.style.transform = 'translate(-50%,-50%) scale(1)';
+                }));
+                setTimeout(() => {
+                    msg.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    msg.style.opacity = '0';
+                    msg.style.transform = 'translate(-50%,-60%) scale(0.8)';
+                    setTimeout(() => msg.remove(), 350);
+                }, 2500);
+
+                // Fireworks burst from random positions
+                const COLORS = ['#4786d6','#7c5cbf','#e05c8a','#e07b39','#6aab6a','#f0a500'];
+                for (let b = 0; b < 8; b++) {
+                    setTimeout(() => {
+                        const x = 80 + Math.random() * (window.innerWidth  - 160);
+                        const y = 80 + Math.random() * (window.innerHeight - 160);
+                        for (let p = 0; p < 16; p++) {
+                            const dot = document.createElement('div');
+                            const color = COLORS[Math.floor(Math.random()*COLORS.length)];
+                            Object.assign(dot.style, {
+                                position: 'fixed', left: x+'px', top: y+'px',
+                                width: '8px', height: '8px', borderRadius: '50%',
+                                background: color, pointerEvents: 'none', zIndex: '99998',
+                                transform: 'translate(-50%,-50%)', opacity: '1'
+                            });
+                            document.body.appendChild(dot);
+                            const angle = (p / 16) * Math.PI * 2;
+                            const dist  = 60 + Math.random() * 80;
+                            const dx = Math.cos(angle) * dist;
+                            const dy = Math.sin(angle) * dist;
+                            requestAnimationFrame(() => requestAnimationFrame(() => {
+                                dot.style.transition = 'all 0.8s cubic-bezier(.2,.8,.4,1)';
+                                dot.style.transform  = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+                                dot.style.opacity    = '0';
+                                dot.style.width = '3px'; dot.style.height = '3px';
+                            }));
+                            setTimeout(() => dot.remove(), 900);
+                        }
+                    }, b * 200);
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
