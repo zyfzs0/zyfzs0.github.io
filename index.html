@@ -33,13 +33,7 @@
             z-index: 0;
             pointer-events: none;
         }
-        /* Ensure all page elements sit above particles */
-        .page-top, .sidebar, .main {
-            position: relative;
-            z-index: 1;
-        }
-        .page-top { z-index: 3; }
-        .sidebar  { z-index: 4; }
+
 
         /* ===== Language Toggle ===== */
         .lang-toggle-btn {
@@ -1010,6 +1004,84 @@
             },
             retina_detect: true
         });
+    </script>
+
+    <!-- ===== Click Burst Effect ===== -->
+    <script>
+        (function() {
+            const COLORS = ['#4786d6','#7c5cbf','#e07b39','#6aab6a','#f0a500','#e05c8a'];
+
+            function burst(x, y) {
+                // Ripple ring
+                const ring = document.createElement('div');
+                Object.assign(ring.style, {
+                    position: 'fixed', left: x+'px', top: y+'px',
+                    width: '8px', height: '8px', borderRadius: '50%',
+                    border: '2px solid ' + COLORS[Math.floor(Math.random()*COLORS.length)],
+                    pointerEvents: 'none', zIndex: '9999',
+                    transform: 'translate(-50%,-50%)',
+                    transition: 'all 0.55s cubic-bezier(.2,.8,.4,1)',
+                    opacity: '0.9'
+                });
+                document.body.appendChild(ring);
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    ring.style.width  = '70px';
+                    ring.style.height = '70px';
+                    ring.style.opacity = '0';
+                }));
+                setTimeout(() => ring.remove(), 600);
+
+                // Dot particles
+                const count = 10;
+                for (let i = 0; i < count; i++) {
+                    const dot = document.createElement('div');
+                    const color = COLORS[Math.floor(Math.random()*COLORS.length)];
+                    const size  = (4 + Math.random()*5) + 'px';
+                    Object.assign(dot.style, {
+                        position: 'fixed', left: x+'px', top: y+'px',
+                        width: size, height: size, borderRadius: '50%',
+                        background: color, pointerEvents: 'none', zIndex: '9999',
+                        transform: 'translate(-50%,-50%)',
+                        transition: 'none', opacity: '1'
+                    });
+                    document.body.appendChild(dot);
+                    const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+                    const dist  = 45 + Math.random() * 40;
+                    const dx = Math.cos(angle) * dist;
+                    const dy = Math.sin(angle) * dist;
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        dot.style.transition = 'all 0.65s cubic-bezier(.2,.8,.4,1)';
+                        dot.style.transform  = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+                        dot.style.opacity    = '0';
+                        dot.style.width  = '2px';
+                        dot.style.height = '2px';
+                    }));
+                    setTimeout(() => dot.remove(), 700);
+                }
+
+                // Floating text emoji
+                const emojis = ['✦','★','•','◆','▲'];
+                const txt = document.createElement('span');
+                Object.assign(txt.style, {
+                    position: 'fixed', left: x+'px', top: y+'px',
+                    color: COLORS[Math.floor(Math.random()*COLORS.length)],
+                    fontSize: (12 + Math.random()*10) + 'px',
+                    pointerEvents: 'none', zIndex: '9999',
+                    transform: 'translate(-50%,-50%)',
+                    transition: 'none', opacity: '1', userSelect: 'none'
+                });
+                txt.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+                document.body.appendChild(txt);
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    txt.style.transition  = 'all 0.8s ease-out';
+                    txt.style.transform   = `translate(-50%, calc(-50% - 60px))`;
+                    txt.style.opacity     = '0';
+                }));
+                setTimeout(() => txt.remove(), 900);
+            }
+
+            document.addEventListener('click', e => burst(e.clientX, e.clientY));
+        })();
     </script>
 </body>
 </html>
