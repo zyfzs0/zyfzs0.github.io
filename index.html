@@ -34,6 +34,30 @@
             pointer-events: none;
         }
 
+        /* ===== Scroll Progress Bar ===== */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #4786d6, #7c5cbf, #e05c8a);
+            z-index: 9998;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* ===== Scroll Reveal ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
 
         /* ===== Language Toggle ===== */
         .lang-toggle-btn {
@@ -1081,6 +1105,84 @@
             }
 
             document.addEventListener('click', e => burst(e.clientX, e.clientY));
+        })();
+    </script>
+
+    <!-- ===== Scroll Progress Bar ===== -->
+    <div id="scroll-progress"></div>
+    <script>
+        (function() {
+            const bar = document.getElementById('scroll-progress');
+            window.addEventListener('scroll', function() {
+                const doc = document.documentElement;
+                const scrollTop = doc.scrollTop || document.body.scrollTop;
+                const scrollHeight = doc.scrollHeight - doc.clientHeight;
+                bar.style.width = (scrollTop / scrollHeight * 100) + '%';
+            }, { passive: true });
+        })();
+    </script>
+
+    <!-- ===== Mouse Cursor Trail ===== -->
+    <script>
+        (function() {
+            const TRAIL_COLORS = ['#4786d6','#7c5cbf','#e05c8a','#e07b39','#6aab6a'];
+            let colorIdx = 0;
+            let lastTrail = 0;
+
+            document.addEventListener('mousemove', function(e) {
+                const now = Date.now();
+                if (now - lastTrail < 40) return; // throttle to ~25fps
+                lastTrail = now;
+
+                const dot = document.createElement('div');
+                const color = TRAIL_COLORS[colorIdx++ % TRAIL_COLORS.length];
+                Object.assign(dot.style, {
+                    position: 'fixed',
+                    left: e.clientX + 'px',
+                    top:  e.clientY + 'px',
+                    width: '6px', height: '6px',
+                    borderRadius: '50%',
+                    background: color,
+                    pointerEvents: 'none',
+                    zIndex: '9997',
+                    transform: 'translate(-50%,-50%)',
+                    opacity: '0.7',
+                    transition: 'none'
+                });
+                document.body.appendChild(dot);
+
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    dot.style.transition = 'all 0.5s ease-out';
+                    dot.style.width   = '2px';
+                    dot.style.height  = '2px';
+                    dot.style.opacity = '0';
+                    dot.style.transform = `translate(calc(-50% + ${(Math.random()-0.5)*16}px), calc(-50% + ${(Math.random()-0.5)*16}px))`;
+                }));
+                setTimeout(() => dot.remove(), 550);
+            });
+        })();
+    </script>
+
+    <!-- ===== Scroll Reveal (Intersection Observer) ===== -->
+    <script>
+        (function() {
+            // Add reveal class to target elements
+            const selectors = '.entry-block, .pub-entry, h1, .interest-tags';
+            document.querySelectorAll(selectors).forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.transitionDelay = (i % 4) * 0.07 + 's';
+            });
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         })();
     </script>
 </body>
