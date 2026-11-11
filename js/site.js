@@ -16,6 +16,7 @@
     document.querySelector('.site-nav').setAttribute('aria-label', chinese ? '主导航' : 'Main navigation');
     document.querySelector('.profile').setAttribute('aria-label', chinese ? '个人信息与联系方式' : 'Profile and contact information');
     updateActiveSection();
+    document.dispatchEvent(new CustomEvent('languagechange', { detail: { language: currentLanguage } }));
   }
 
   try {

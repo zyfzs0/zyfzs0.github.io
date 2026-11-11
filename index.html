@@ -14,10 +14,20 @@
     <meta content="Data Science at the University of Michigan, Ann Arbor. Publications, research, and experience." property="og:description"/>
     <meta content="https://zyfzs0.github.io/" property="og:url"/>
     <meta content="https://zyfzs0.github.io/images/me.jpg" property="og:image"/>
-    <link href="./css/site.css" rel="stylesheet"/>
-    <script defer="" src="./js/site.js"></script>
+    <link href="./css/site.css?v=20261111-motion" rel="stylesheet"/>
+    <script defer="" src="./js/site.js?v=20261111-motion"></script>
+    <script defer="" src="./js/effects.js?v=20261111-motion"></script>
   </head>
   <body>
+    <div id="ambient-bg" aria-hidden="true">
+      <span class="aurora aurora-one"></span>
+      <span class="aurora aurora-two"></span>
+      <span class="aurora aurora-three"></span>
+      <div class="cursor-glow" id="cursor-glow"></div>
+      <canvas id="particles-js"></canvas>
+    </div>
+    <canvas id="interaction-canvas" aria-hidden="true"></canvas>
+    <div id="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main-content"><span data-lang="en" lang="en">Skip to main content</span><span data-lang="zh" lang="zh-CN">跳转至正文</span></a>
     <header class="site-header">
       <div class="header-inner">
@@ -33,12 +43,18 @@
             <li><a href="#Awards"><span data-lang="en" lang="en">Awards</span><span data-lang="zh" lang="zh-CN">奖项</span></a></li>
           </ul>
         </nav>
-        <button aria-label="切换为中文" class="lang-toggle-btn" hidden="" id="lang-btn" type="button"><span id="lang-btn-text" lang="zh-CN">中文</span></button>
+        <div class="header-actions">
+          <button aria-label="Toggle visual effects" aria-pressed="false" class="effects-toggle" hidden="" id="effects-btn" type="button"><span aria-hidden="true">✦</span><span data-lang="en" lang="en">Effects</span><span data-lang="zh" lang="zh-CN">动效</span></button>
+          <button aria-label="切换为中文" class="lang-toggle-btn" hidden="" id="lang-btn" type="button"><span id="lang-btn-text" lang="zh-CN">中文</span></button>
+        </div>
       </div>
     </header>
     <div class="page-layout">
       <aside aria-label="Profile and contact information" class="profile">
-        <img alt="Portrait of Yifan Zhang" class="profile-photo" fetchpriority="high" height="180" src="./images/me.jpg" width="180"/>
+        <div class="profile-portrait">
+          <img alt="Portrait of Yifan Zhang" class="profile-photo" fetchpriority="high" height="180" src="./images/me.jpg" width="180"/>
+          <span class="profile-orbit" aria-hidden="true"></span>
+        </div>
         <h1 class="profile-name">Yifan Zhang</h1>
         <p class="profile-name-zh" lang="zh-CN">张一凡</p>
         <p class="profile-role"><span data-lang="en" lang="en">M.S. Student in Data Science</span><span data-lang="zh" lang="zh-CN">数据科学硕士研究生</span></p>
@@ -439,5 +455,6 @@
     <footer class="site-footer">
       <p>© 2026 Yifan Zhang <span aria-hidden="true">·</span> <span data-lang="en" lang="en">Last updated: November 2026</span><span data-lang="zh" lang="zh-CN">最近更新：2026 年 11 月</span></p>
     </footer>
+    <div class="effects-toast" id="effects-toast" role="status" aria-live="polite" hidden></div>
   </body>
 </html>
