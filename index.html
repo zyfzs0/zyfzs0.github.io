@@ -1,1314 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="Yifan Zhang">
-    <title>Yifan Zhang - Personal Website</title>
-    <meta name="description" content="Yifan Zhang - Senior undergraduate student in Data Science and Big Data Technology at Tongji University. Researcher in Computer Vision, LLM, and Data Science.">
-    <meta name="keywords" content="Yifan Zhang, 张一凡, Tongji University, University of Michigan, Data Science, Computer Vision, Personal Website">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-    <meta name="renderer" content="webkit">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/blog_basic.css">
-    <link rel="stylesheet" href="./css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/insight.css">
-    <link rel="stylesheet" href="./css/search.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="./js/jquery.js"></script>
-    <style>
-        /* ===== Particles Background ===== */
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* ===== Scroll Progress Bar ===== */
-        #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            width: 0%;
-            background: linear-gradient(90deg, #4786d6, #7c5cbf, #e05c8a);
-            z-index: 9998;
-            transition: width 0.1s linear;
-            border-radius: 0 2px 2px 0;
-        }
-
-        /* ===== Scroll Reveal ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.55s ease, transform 0.55s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        /* ===== Language Toggle ===== */
-        .lang-toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 14px;
-            border: 1.5px solid #4786d6;
-            border-radius: 999em;
-            background: transparent;
-            color: #4786d6;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
-            letter-spacing: 0.5px;
-        }
-        .lang-toggle-btn:hover {
-            background: #4786d6;
-            color: #fff;
-        }
-        .lang-toggle-btn .lang-icon {
-            font-size: 14px;
-        }
-
-        /* ===== General Enhancements ===== */
-        body {
-            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-        }
-
-        /* Hide/show language content */
-        [data-lang="zh"] { display: none; }
-        [data-lang="en"] { display: inline; }
-        .lang-block-zh { display: none; }
-        .lang-block-en { display: block; }
-
-        body.zh [data-lang="zh"] { display: inline; }
-        body.zh [data-lang="en"] { display: none; }
-        body.zh .lang-block-zh { display: block; }
-        body.zh .lang-block-en { display: none; }
-        body.zh .lang-li-zh { display: list-item; }
-        body.zh .lang-li-en { display: none; }
-        .lang-li-zh { display: none; }
-        .lang-li-en { display: list-item; }
-
-        /* ===== Sidebar Contact Info ===== */
-        .contact-info {
-            font-size: 12px;
-            color: #666;
-            text-align: center;
-            padding: 0 12px;
-            line-height: 1.8;
-            margin-top: 8px;
-        }
-        .contact-info a {
-            color: #4786d6;
-            word-break: break-all;
-        }
-        .contact-info .contact-row {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 4px;
-            margin-bottom: 2px;
-        }
-        .contact-info i {
-            margin-top: 3px;
-            flex-shrink: 0;
-            color: #4786d6;
-        }
-
-        /* ===== Section Titles ===== */
-        .post .post-content h1 {
-            color: #2c2c2c;
-            font-size: 20px;
-            font-weight: 700;
-            border-bottom: 2px solid #4786d6;
-            padding-bottom: 6px;
-            margin-top: 36px;
-            margin-bottom: 14px;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== Entry Blocks ===== */
-        .entry-block {
-            margin-bottom: 18px;
-        }
-        .entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        .entry-title {
-            font-weight: 600;
-            color: #1a1a1a;
-            font-size: 15px;
-        }
-        .entry-subtitle {
-            font-size: 13.5px;
-            color: #555;
-            font-style: italic;
-        }
-        .entry-date {
-            font-size: 13px;
-            color: #888;
-            white-space: nowrap;
-        }
-        .entry-location {
-            font-size: 13px;
-            color: #888;
-        }
-        .entry-meta {
-            font-size: 13.5px;
-            color: #444;
-            margin-top: 3px;
-        }
-        .entry-bullet {
-            margin-top: 6px;
-            padding-left: 18px;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.75;
-        }
-        .entry-bullet li {
-            margin-bottom: 4px;
-        }
-
-        /* ===== Publication Entry ===== */
-        .pub-entry {
-            background: #f8faff;
-            border-left: 3px solid #4786d6;
-            padding: 10px 14px;
-            border-radius: 0 6px 6px 0;
-            margin-bottom: 12px;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-        .pub-venue {
-            display: inline-block;
-            background: #4786d6;
-            color: #fff;
-            border-radius: 4px;
-            padding: 1px 7px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-
-        /* ===== Award List ===== */
-        .award-list {
-            list-style: none;
-            padding: 0;
-        }
-        .award-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 5px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 14px;
-            gap: 12px;
-        }
-        .award-list li:last-child {
-            border-bottom: none;
-        }
-        .award-name {
-            flex: 1;
-            color: #333;
-        }
-        .award-date {
-            color: #888;
-            white-space: nowrap;
-            font-size: 13px;
-        }
-
-        /* ===== Skills ===== */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 6px 12px;
-            font-size: 14px;
-            align-items: baseline;
-        }
-        .skill-label {
-            font-weight: 600;
-            color: #555;
-            white-space: nowrap;
-        }
-        .skill-value {
-            color: #333;
-        }
-
-        /* ===== Scholarship Tag ===== */
-        .schol-tag {
-            display: inline-block;
-            background: #eef3fc;
-            color: #4786d6;
-            border-radius: 4px;
-            padding: 1px 8px;
-            font-size: 12px;
-            margin: 2px 2px 2px 0;
-        }
-
-        /* ===== Research Interest Tags ===== */
-        .interest-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
-        }
-        .interest-tag {
-            background: #f0f4ff;
-            color: #4786d6;
-            border: 1px solid #c5d7f5;
-            border-radius: 20px;
-            padding: 3px 14px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        /* ===== Sidebar bottom text ===== */
-        .footer-note {
-            font-size: 11px;
-            color: #aaa;
-            text-align: center;
-        }
-
-        /* ===== Responsive ===== */
-        @media screen and (max-width: 960px) {
-            .entry-header { flex-direction: column; }
-            .award-list li { flex-direction: column; gap: 2px; }
-            .skills-grid { grid-template-columns: 1fr; }
-        }
-    </style>
-</head>
-
-<body id="body-root">
-    <!-- ===== Particles Background ===== -->
-    <div id="particles-js"></div>
-    <!-- ===== Top Navigation ===== -->
-    <div class="page-top animated fadeInDown">
-        <div class="nav">
-            <li><a href="#About-Me"><span data-lang="en">Biography</span><span data-lang="zh">简介</span></a></li>
-            <li><a href="#Education"><span data-lang="en">Education</span><span data-lang="zh">教育</span></a></li>
-            <li><a href="#Publications"><span data-lang="en">Publications</span><span data-lang="zh">发表</span></a></li>
-            <li><a href="#Research"><span data-lang="en">Research</span><span data-lang="zh">研究</span></a></li>
-            <li><a href="#Projects"><span data-lang="en">Projects</span><span data-lang="zh">项目</span></a></li>
-            <li><a href="#Internship"><span data-lang="en">Internship</span><span data-lang="zh">实习</span></a></li>
-            <li><a href="#Awards"><span data-lang="en">Awards</span><span data-lang="zh">奖项</span></a></li>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="Yifan Zhang" name="author"/>
+    <meta content="Yifan Zhang (张一凡), M.S. student in Data Science at the University of Michigan, Ann Arbor. Research in efficient multimodal models, computer-using agents, and visual generation." name="description"/>
+    <meta content="#245ca6" name="theme-color"/>
+    <link href="./images/favicon.svg" rel="icon" type="image/svg+xml"/>
+    <title>Yifan Zhang | Data Science &amp; Machine Learning</title>
+    <link href="https://zyfzs0.github.io/" rel="canonical"/>
+    <meta content="website" property="og:type"/>
+    <meta content="Yifan Zhang | Academic Homepage" property="og:title"/>
+    <meta content="Data Science at the University of Michigan, Ann Arbor. Publications, research, and experience." property="og:description"/>
+    <meta content="https://zyfzs0.github.io/" property="og:url"/>
+    <meta content="https://zyfzs0.github.io/images/me.jpg" property="og:image"/>
+    <link href="./css/site.css" rel="stylesheet"/>
+    <script defer="" src="./js/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content"><span data-lang="en" lang="en">Skip to main content</span><span data-lang="zh" lang="zh-CN">跳转至正文</span></a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="#About-Me">Yifan Zhang<span> / 张一凡</span></a>
+        <nav aria-label="Main navigation" class="site-nav">
+          <ul>
+            <li><a href="#About-Me"><span data-lang="en" lang="en">About</span><span data-lang="zh" lang="zh-CN">简介</span></a></li>
+            <li><a href="#Publications"><span data-lang="en" lang="en">Publications</span><span data-lang="zh" lang="zh-CN">论文</span></a></li>
+            <li><a href="#Education"><span data-lang="en" lang="en">Education</span><span data-lang="zh" lang="zh-CN">教育</span></a></li>
+            <li><a href="#Research"><span data-lang="en" lang="en">Research</span><span data-lang="zh" lang="zh-CN">科研</span></a></li>
+            <li><a href="#Internship"><span data-lang="en" lang="en">Experience</span><span data-lang="zh" lang="zh-CN">实习</span></a></li>
+            <li><a href="#Projects"><span data-lang="en" lang="en">Projects</span><span data-lang="zh" lang="zh-CN">项目</span></a></li>
+            <li><a href="#Awards"><span data-lang="en" lang="en">Awards</span><span data-lang="zh" lang="zh-CN">奖项</span></a></li>
+          </ul>
+        </nav>
+        <button aria-label="切换为中文" class="lang-toggle-btn" hidden="" id="lang-btn" type="button"><span id="lang-btn-text" lang="zh-CN">中文</span></button>
+      </div>
+    </header>
+    <div class="page-layout">
+      <aside aria-label="Profile and contact information" class="profile">
+        <img alt="Portrait of Yifan Zhang" class="profile-photo" fetchpriority="high" height="180" src="./images/me.jpg" width="180"/>
+        <h1 class="profile-name">Yifan Zhang</h1>
+        <p class="profile-name-zh" lang="zh-CN">张一凡</p>
+        <p class="profile-role"><span data-lang="en" lang="en">M.S. Student in Data Science</span><span data-lang="zh" lang="zh-CN">数据科学硕士研究生</span></p>
+        <p class="profile-affiliation"><span data-lang="en" lang="en">University of Michigan, Ann Arbor</span><span data-lang="zh" lang="zh-CN">密歇根大学安娜堡分校</span></p>
+        <div class="profile-links"><a href="https://scholar.google.com/citations?user=3Wo4NMkAAAAJ" rel="noopener noreferrer" target="_blank">Google Scholar</a><a href="https://github.com/zyfzs0" rel="noopener noreferrer" target="_blank">GitHub</a><a href="https://openreview.net/profile?id=~Yifan_Zhang25" rel="noopener noreferrer" target="_blank">OpenReview</a></div>
+        <div class="contact-info">
+          <div class="contact-row"><a href="mailto:yifanzhg@umich.edu">yifanzhg@umich.edu</a></div>
         </div>
-        <div class="information">
-            <div class="nav_right_btn">
-                <button class="lang-toggle-btn" id="lang-btn" onclick="toggleLang()">
-                    <span class="lang-icon">🌐</span>
-                    <span id="lang-btn-text">中文</span>
-                </button>
+        <details class="profile-details">
+          <summary><span data-lang="en" lang="en">More contact details</span><span data-lang="zh" lang="zh-CN">更多联系信息</span></summary>
+          <div class="contact-info">
+            <div class="contact-row"><a href="mailto:zyf20020730@gmail.com">zyf20020730@gmail.com</a></div>
+            <div class="contact-row"><a href="mailto:zhangyifan020730@163.com">zhangyifan020730@163.com</a></div>
+            <div class="contact-row"><a href="tel:+8613796823193">+86 137 9682 3193</a></div>
+            <div class="contact-row"><span data-lang="en" lang="en">Harbin · Beijing · Ann Arbor</span><span data-lang="zh" lang="zh-CN">哈尔滨 · 北京 · 安娜堡</span></div>
+          </div>
+        </details>
+        <p class="profile-note"><span data-lang="en" lang="en">B.Eng., Tongji University · 2025</span><span data-lang="zh" lang="zh-CN">同济大学 · 工学学士 · 2025</span></p>
+      </aside>
+      <main id="main-content" tabindex="-1">
+        <section aria-labelledby="About-Me-title" class="section" id="About-Me">
+          <p class="eyebrow"><span data-lang="en" lang="en">Data Science · Machine Learning</span><span data-lang="zh" lang="zh-CN">数据科学 · 机器学习</span></p>
+          <h2 class="section-title" id="About-Me-title"><span data-lang="en" lang="en">About Me</span><span data-lang="zh" lang="zh-CN">关于我</span></h2>
+          <div class="lang-block-en" lang="en">
+            <p>I am an M.S. student in <strong>Data Science</strong> at the <strong>University of Michigan, Ann Arbor</strong>. I received my B.Eng. in Data Science and Big Data Technology from <strong>Tongji University</strong> in July 2025.</p>
+            <p>In spring 2023, I was an exchange student in the Department of Electrical Engineering at <strong>National Taiwan University</strong>.</p>
+            <p>My research interests span efficient multimodal models and visual generation, including speculative decoding, streaming video agents, remote sensing image restoration, and Chinese character modeling.</p>
+          </div>
+          <div class="lang-block-zh" lang="zh-CN">
+            <p>我目前在<strong>密歇根大学安娜堡分校</strong>攻读<strong>数据科学理学硕士</strong>学位。2025 年 7 月，我毕业于<strong>同济大学</strong>数据科学与大数据技术专业，获工学学士学位。</p>
+            <p>2023 年春季，我赴<strong>国立台湾大学</strong>电机工程学系交换学习。</p>
+            <p>我的研究兴趣涵盖高效多模态模型与视觉生成，具体包括推测解码、流式视频智能体、遥感图像修复和汉字建模。</p>
+          </div>
+          <h3 class="subheading"><span data-lang="en" lang="en">Research Interests</span><span data-lang="zh" lang="zh-CN">研究兴趣</span></h3>
+          <div class="interest-tags"><span class="interest-tag"><span data-lang="en" lang="en">Speculative Decoding</span><span data-lang="zh" lang="zh-CN">推测解码</span></span><span class="interest-tag"><span data-lang="en" lang="en">Streaming Video Agents</span><span data-lang="zh" lang="zh-CN">流式视频智能体</span></span><span class="interest-tag"><span data-lang="en" lang="en">Remote Sensing Cloud Removal</span><span data-lang="zh" lang="zh-CN">遥感影像去云</span></span><span class="interest-tag"><span data-lang="en" lang="en">Vector Font Generation</span><span data-lang="zh" lang="zh-CN">矢量字体生成</span></span><span class="interest-tag"><span data-lang="en" lang="en">Character Image Inpainting</span><span data-lang="zh" lang="zh-CN">汉字图像修复</span></span></div>
+        </section>
+        <section aria-labelledby="Publications-title" class="section" id="Publications">
+          <h2 class="section-title" id="Publications-title"><span data-lang="en" lang="en">Publications</span><span data-lang="zh" lang="zh-CN">论文成果</span></h2>
+          <div class="publication-group">
+            <h3 class="group-heading"><span data-lang="en" lang="en">Published &amp; Accepted</span><span data-lang="zh" lang="zh-CN">已发表与已录用</span></h3>
+            <article class="pub-entry pub-entry-featured">
+              <div class="pub-heading"><span class="pub-venue">NeurIPS 2026</span><span class="pub-status"><span data-lang="en" lang="en">Accepted · Poster</span><span data-lang="zh" lang="zh-CN">已录用 · 海报展示</span></span></div>
+              <h4 class="pub-title"><a href="https://openreview.net/forum?id=UlijzWpwGW" rel="noopener noreferrer" target="_blank">OS-Omni: A Cross-Platform Benchmark for Generalist Computer-Using Agents</a></h4>
+              <p class="pub-authors">Hui Shen, Yunta Hsieh, Jianing Ma, …, <strong>Yifan Zhang</strong>, et al.</p>
+              <p class="pub-meta">Evaluations and Datasets Track</p>
+              <div class="pub-links"><a aria-label="OpenReview: OS-Omni: A Cross-Platform Benchmark for Generalist Computer-Using Agents" href="https://openreview.net/forum?id=UlijzWpwGW" rel="noopener noreferrer" target="_blank">OpenReview</a><a aria-label="PDF: OS-Omni: A Cross-Platform Benchmark for Generalist Computer-Using Agents" href="https://openreview.net/attachment?id=UlijzWpwGW&amp;name=pdf" rel="noopener noreferrer" target="_blank">PDF</a></div>
+            </article>
+            <article class="pub-entry pub-entry-featured">
+              <div class="pub-heading"><span class="pub-venue">ICCPR 2026</span><span class="pub-status"><span data-lang="en" lang="en">Accepted</span><span data-lang="zh" lang="zh-CN">已录用</span></span></div>
+              <h4 class="pub-title"><a href="https://openreview.net/forum?id=EOqcIudAN1" rel="noopener noreferrer" target="_blank">Autoregressive Extraction of Chinese Character Strokes with Diffusion Models</a></h4>
+              <p class="pub-authors">Jiawei Ma, Haolong Li, <strong>Yifan Zhang</strong>, Song Yang, Chen Ye</p>
+              <p class="pub-meta">ICCPR 2026</p>
+              <div class="pub-links"><a aria-label="OpenReview: Autoregressive Extraction of Chinese Character Strokes with Diffusion Models" href="https://openreview.net/forum?id=EOqcIudAN1" rel="noopener noreferrer" target="_blank">OpenReview</a><a aria-label="PDF: Autoregressive Extraction of Chinese Character Strokes with Diffusion Models" href="https://openreview.net/attachment?id=EOqcIudAN1&amp;name=pdf" rel="noopener noreferrer" target="_blank">PDF</a></div>
+            </article>
+            <article class="pub-entry">
+              <div class="pub-heading"><span class="pub-venue">AAAI 2024</span><span class="pub-status"><span data-lang="en" lang="en">Published</span><span data-lang="zh" lang="zh-CN">已发表</span></span></div>
+              <h4 class="pub-title"><a href="https://doi.org/10.1609/aaai.v38i4.28090" rel="noopener noreferrer" target="_blank">Towards Automated Chinese Ancient Character Restoration: A Diffusion-Based Method with a New Dataset</a></h4>
+              <p class="pub-authors">Haolong Li, Chenghao Du, Ziheng Jiang, <strong>Yifan Zhang</strong>, Jiawei Ma, Chen Ye</p>
+              <p class="pub-meta">Proceedings of the AAAI Conference on Artificial Intelligence, 38(4), 3073–3081.</p>
+              <div class="pub-links"><a aria-label="DOI: Towards Automated Chinese Ancient Character Restoration: A Diffusion-Based Method with a New Dataset" href="https://doi.org/10.1609/aaai.v38i4.28090" rel="noopener noreferrer" target="_blank">DOI</a></div>
+            </article>
+            <article class="pub-entry">
+              <div class="pub-heading"><span class="pub-venue">ICBASE 2024</span><span class="pub-status"><span data-lang="en" lang="en">Published</span><span data-lang="zh" lang="zh-CN">已发表</span></span></div>
+              <h4 class="pub-title"><a href="https://doi.org/10.1109/ICBASE63199.2024.10762377" rel="noopener noreferrer" target="_blank">Coordinated Optimization and Configuration Optimization of Wind, Photovoltaics and Energy Storage based on Particle Swarm Optimization Algorithm</a></h4>
+              <p class="pub-authors">Shatong Zhu, <strong>Yifan Zhang</strong></p>
+              <p class="pub-meta">International Conference on Big Data, Artificial Intelligence and Software Engineering, 2024.</p>
+              <div class="pub-links"><a aria-label="DOI: Coordinated Optimization and Configuration Optimization of Wind, Photovoltaics and Energy Storage based on Particle Swarm Optimization Algorithm" href="https://doi.org/10.1109/ICBASE63199.2024.10762377" rel="noopener noreferrer" target="_blank">DOI</a></div>
+            </article>
+          </div>
+          <div class="publication-group">
+            <h3 class="group-heading"><span data-lang="en" lang="en">Preprints &amp; Submissions</span><span data-lang="zh" lang="zh-CN">预印本与投稿</span></h3>
+            <article class="pub-entry">
+              <div class="pub-heading"><span class="pub-venue">2026</span><span class="pub-status"><span data-lang="en" lang="en">Preprint</span><span data-lang="zh" lang="zh-CN">预印本</span></span></div>
+              <h4 class="pub-title"><a href="https://www.preprints.org/manuscript/202603.2344" rel="noopener noreferrer" target="_blank">Speculative Decoding for Multimodal Models: A Survey</a></h4>
+              <p class="pub-authors"><strong>Yifan Zhang</strong>, Yuren Wang, Yunta Hsieh, et al.</p>
+              <details class="pub-authors-full">
+                <summary><span data-lang="en" lang="en">Author list</span><span data-lang="zh" lang="zh-CN">作者列表</span></summary>
+                <p class="pub-authors"><strong>Yifan Zhang</strong>, Yuren Wang, Yunta Hsieh, Xin Wang, Ping Zhang, Ziyi Yang, Jianing Ma, Zesen Zhao, Boyuan Zheng, Hei Ting Una Chan, Jiarui Li, Xueshen Liu, Kunxiao Gao, Yanheng Shang, Ruoyan Zhang, Ruiyao Liu, Jingxuan Zhang, Junchen Li, Zhongwei Wan, Ziheng Zhang, et al.</p>
+              </details>
+              <p class="pub-meta"><span data-lang="en" lang="en">Submitted to TMLR · Apr 2026</span><span data-lang="zh" lang="zh-CN">投稿至 TMLR · 2026 年 4 月</span></p>
+              <div class="pub-links"><a aria-label="Preprint: Speculative Decoding for Multimodal Models: A Survey" href="https://www.preprints.org/manuscript/202603.2344" rel="noopener noreferrer" target="_blank">Preprint</a></div>
+            </article>
+            <article class="pub-entry">
+              <div class="pub-heading"><span class="pub-venue">2026</span><span class="pub-status"><span data-lang="en" lang="en">Preprint</span><span data-lang="zh" lang="zh-CN">预印本</span></span></div>
+              <h4 class="pub-title"><a href="https://arxiv.org/abs/2603.14989" rel="noopener noreferrer" target="_blank">MMSpec: Benchmarking Speculative Decoding for Vision-Language Models</a></h4>
+              <p class="pub-authors">Hui Shen, Xin Wang, Ping Zhang, …, <strong>Yifan Zhang</strong>, et al.</p>
+              <details class="pub-authors-full">
+                <summary><span data-lang="en" lang="en">Author list</span><span data-lang="zh" lang="zh-CN">作者列表</span></summary>
+                <p class="pub-authors">Hui Shen, Xin Wang, Ping Zhang, Yunta Hsieh, Boyuan Zheng, Qi Han, Zhongwei Wan, Ziheng Zhang, Jingxuan Zhang, Jing Xiong, Ziyuan Liu, <strong>Yifan Zhang</strong>, Hangrui Cao, Chenyang Zhao, Mi Zhang</p>
+              </details>
+              <p class="pub-meta"><span data-lang="en" lang="en">Submitted to ECCV 2026 · Feb 2026</span><span data-lang="zh" lang="zh-CN">投稿至 ECCV 2026 · 2026 年 2 月</span></p>
+              <div class="pub-links"><a aria-label="Preprint: MMSpec: Benchmarking Speculative Decoding for Vision-Language Models" href="https://arxiv.org/abs/2603.14989" rel="noopener noreferrer" target="_blank">Preprint</a></div>
+            </article>
+            <article class="pub-entry">
+              <div class="pub-heading"><span class="pub-venue">2026</span><span class="pub-status"><span data-lang="en" lang="en">Preprint</span><span data-lang="zh" lang="zh-CN">预印本</span></span></div>
+              <h4 class="pub-title"><a href="https://arxiv.org/abs/2603.27959" rel="noopener noreferrer" target="_blank">MathGen: Benchmarking Mathematical Generation for Text-to-Image Models</a></h4>
+              <p class="pub-authors">Ruiyao Liu, Hui Shen, Ping Zhang, …, <strong>Yifan Zhang</strong>, et al.</p>
+              <details class="pub-authors-full">
+                <summary><span data-lang="en" lang="en">Author list</span><span data-lang="zh" lang="zh-CN">作者列表</span></summary>
+                <p class="pub-authors">Ruiyao Liu, Hui Shen, Ping Zhang, Yunta Hsieh, <strong>Yifan Zhang</strong>, Jing Xu, Sicheng Chen, Junchen Li, Jiawei Lu, Jianing Ma, Jiaqi Mo, Qi Han, Zhen Zhang, Zhongwei Wan, Jing Xiong, Xin Wang, Ziyuan Liu, Hangrui Cao, Ngai Wong</p>
+              </details>
+              <p class="pub-meta"><span data-lang="en" lang="en">Submitted to ECCV 2026 · Feb 2026</span><span data-lang="zh" lang="zh-CN">投稿至 ECCV 2026 · 2026 年 2 月</span></p>
+              <div class="pub-links"><a aria-label="Preprint: MathGen: Benchmarking Mathematical Generation for Text-to-Image Models" href="https://arxiv.org/abs/2603.27959" rel="noopener noreferrer" target="_blank">Preprint</a></div>
+            </article>
+            <article class="pub-entry">
+              <div class="pub-heading"><span class="pub-venue">2026</span><span class="pub-status"><span data-lang="en" lang="en">Preprint</span><span data-lang="zh" lang="zh-CN">预印本</span></span></div>
+              <h4 class="pub-title"><a href="https://arxiv.org/abs/2602.00536" rel="noopener noreferrer" target="_blank">SADER: Structure-Aware Diffusion Framework with DEterministic Resampling for Multi-Temporal Remote Sensing Cloud Removal</a></h4>
+              <p class="pub-authors"><strong>Yifan Zhang</strong>, Qian Chen, Yi Liu, Wengen Li, Jihong Guan</p>
+              <p class="pub-meta">arXiv:2602.00536 · 2026</p>
+              <div class="pub-links"><a aria-label="Preprint: SADER: Structure-Aware Diffusion Framework with DEterministic Resampling for Multi-Temporal Remote Sensing Cloud Removal" href="https://arxiv.org/abs/2602.00536" rel="noopener noreferrer" target="_blank">Preprint</a></div>
+            </article>
+          </div>
+          <div class="publication-group">
+            <h3 class="group-heading"><span data-lang="en" lang="en">Patent Applications</span><span data-lang="zh" lang="zh-CN">专利申请</span></h3>
+            <article class="pub-entry">
+              <h4 class="pub-title"><span data-lang="en" lang="en">A Cold Diffusion Model-based Method for Restoration of Inscription Text</span><span data-lang="zh" lang="zh-CN">基于冷扩散模型的碑文文字修复方法</span></h4>
+              <p class="pub-meta"><span data-lang="en" lang="en">Application filed · Third listed contributor</span><span data-lang="zh" lang="zh-CN">已申请 · 第三署名</span></p>
+            </article>
+            <article class="pub-entry">
+              <h4 class="pub-title"><span data-lang="en" lang="en">A Method to Synthesize an Ancient Chinese Inscription Dataset That Simulates Real Erosion</span><span data-lang="zh" lang="zh-CN">一种模拟真实侵蚀效果的古代汉字碑刻数据集合成方法</span></h4>
+              <p class="pub-meta"><span data-lang="en" lang="en">Application filed · Second listed contributor</span><span data-lang="zh" lang="zh-CN">已申请 · 第二署名</span></p>
+            </article>
+          </div>
+        </section>
+        <section aria-labelledby="Education-title" class="section" id="Education">
+          <h2 class="section-title" id="Education-title"><span data-lang="en" lang="en">Education</span><span data-lang="zh" lang="zh-CN">教育经历</span></h2>
+          <div class="entry-block">
+            <div class="entry-header">
+              <div>
+                <h3 class="entry-title"> <span data-lang="en" lang="en">University of Michigan, Ann Arbor</span> <span data-lang="zh" lang="zh-CN">密歇根大学安娜堡分校</span> </h3>
+                <div class="entry-subtitle"> <span data-lang="en" lang="en">M.S. in Data Science · College of Literature, Science, and the Arts</span> <span data-lang="zh" lang="zh-CN">数据科学理学硕士 · 文理学院（LSA）</span> </div>
+              </div>
+              <div style="text-align:right;">
+                <div class="entry-date"><span data-lang="en" lang="en">Aug 2025 – Present</span><span data-lang="zh" lang="zh-CN">2025 年 8 月 – 至今</span></div>
+                <div class="entry-location"> <span data-lang="en" lang="en">Ann Arbor, MI, USA</span> <span data-lang="zh" lang="zh-CN">美国密歇根州安娜堡</span> </div>
+              </div>
             </div>
-            <div class="avatar"></div>
-        </div>
-    </div>
-
-    <!-- ===== Sidebar ===== -->
-    <div class="sidebar animated fadeInDown">
-        <div class="sidebar-top">
-            <div class="logo-title">
-                <div class="title">
-                    <img src="./images/me.jpg" style="width:180px; border-radius:50%; border:3px solid #e8eef8;" alt="Yifan Zhang">
-                    <h3 title="">
-                        <a href="https://zyfzs0.github.io/">Yifan Zhang</a>
-                        <br>
-                        <span style="font-size:14px; font-weight:400; color:#777;">张一凡</span>
-                    </h3>
-                    <div class="description">
-                        <p>
-                            <span data-lang="en">M.S. in Data Science, University of Michigan<br>B.Eng. in Data Science, Tongji University</span>
-                            <span data-lang="zh">密歇根大学安娜堡 数据科学硕士<br>同济大学 数据科学与大数据技术</span>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="contact-info">
-                    <div class="contact-row">
-                        <i class="fa fa-envelope"></i>
-                        <a href="mailto:zhangyifan020730@163.com">zhangyifan020730@163.com</a>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fa fa-envelope"></i>
-                        <a href="mailto:zyf20020730@gmail.com">zyf20020730@gmail.com</a>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fa fa-envelope"></i>
-                        <a href="mailto:yifanzhg@umich.edu">yifanzhg@umich.edu</a>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fa fa-phone"></i>
-                        <span>+86-13796823193</span>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fa fa-map-marker"></i>
-                        <span>
-                            <span data-lang="en">Harbin, Heilongjiang, China</span>
-                            <span data-lang="zh">黑龙江省哈尔滨市</span>
-                        </span>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fa fa-map-marker"></i>
-                        <span>
-                            <span data-lang="en">Shijingshan, Beijing, China</span>
-                            <span data-lang="zh">北京市石景山区</span>
-                        </span>
-                    </div>
-                    <div class="contact-row">
-                        <i class="fa fa-map-marker"></i>
-                        <span>
-                            <span data-lang="en">Ann Arbor, MI, USA</span>
-                            <span data-lang="zh">美国密歇根州安娜堡</span>
-                        </span>
-                    </div>
-                </div>
-
-                <ul class="social-links" style="margin-top:14px;">
-                    <li><a target="_blank" rel="noopener" href="https://github.com/zyfzs0"><i class="fa fa-github"></i>Github</a></li>
-                    <li><a href="mailto:zhangyifan020730@163.com"><i class="fa fa-envelope"></i>Email</a></li>
-                    <li><a target="_blank" href="https://zyfzs0.github.io/"><i class="fa fa-globe"></i>Web</a></li>
-                    <li><a target="_blank" href="https://scholar.google.com/citations?user=3Wo4NMkAAAAJ&hl=zh-CN"><i class="fa fa-graduation-cap"></i>Scholar</a></li>
-                </ul>
+            <div class="entry-meta"> <span data-lang="en" lang="en"><b>GPA:</b> 4.0 / 4.0</span> <span data-lang="zh" lang="zh-CN"><b>GPA：</b>4.0 / 4.0</span> </div>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <div>
+                <h3 class="entry-title"> <span data-lang="en" lang="en">Tongji University</span> <span data-lang="zh" lang="zh-CN">同济大学</span> </h3>
+                <div class="entry-subtitle"> <span data-lang="en" lang="en">B.Eng. in Data Science and Big Data Technology</span> <span data-lang="zh" lang="zh-CN">数据科学与大数据技术 · 工学学士</span> </div>
+              </div>
+              <div style="text-align:right;">
+                <div class="entry-date"><span data-lang="en" lang="en">Sep 2020 – Jul 2025</span><span data-lang="zh" lang="zh-CN">2020 年 9 月 – 2025 年 7 月</span></div>
+                <div class="entry-location"> <span data-lang="en" lang="en">Shanghai, China</span> <span data-lang="zh" lang="zh-CN">中国·上海</span> </div>
+              </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="by_farbox footer-note">© 2025 Yifan Zhang</div>
-        </div>
-    </div>
-
-    <!-- ===== Main Content ===== -->
-    <div class="main">
-        <div class="autopagerize_page_element">
-            <div class="content">
-                <div class="post-page">
-                    <div class="post animated fadeInDown">
-                        <div class="post-title"><h3><a></a></h3></div>
-                        <div class="post-content">
-
-                            <!-- ==================== ABOUT ME ==================== -->
-                            <h1 id="About-Me">
-                                <a href="#About-Me" class="headerlink"></a>
-                                <span data-lang="en">About Me</span>
-                                <span data-lang="zh">关于我</span>
-                            </h1>
-
-                            <div class="lang-block-en">
-                                <p>I am a graduate student pursuing a <b>Master of Science in Data Science</b> at the <b>University of Michigan, Ann Arbor</b> (LSA). I completed my Bachelor of Engineering in <b>Data Science and Big Data Technology</b> at <b>Tongji University</b>, Shanghai (July 2025).</p>
-                                <p>In the spring semester of 2023, I studied as an exchange student in the Department of Electrical Engineering at <b>National Taiwan University</b>, Taipei.</p>
-                            </div>
-                            <div class="lang-block-zh">
-                                <p>我目前就读于<b>密歇根大学安娜堡</b>（LSA学院）<b>数据科学硕士</b>（Master of Data Science）专业。本科毕业于<b>同济大学</b>计算机科学与技术学院数据科学与大数据技术专业（2025年7月）。</p>
-                                <p>2023年春季学期，我赴台北<b>国立台湾大学</b>电机工程学系进行交换学习。</p>
-                            </div>
-
-                            <h2 id="Research-Interest" style="color:#5f5f5f; font-size:17px; font-weight:600; margin-top:20px;">
-                                <span data-lang="en">Research Interests</span>
-                                <span data-lang="zh">研究兴趣</span>
-                            </h2>
-                            <div class="interest-tags">
-                                <span class="interest-tag">Speculative Decoding</span>
-                                <span class="interest-tag">Stream Video Agent</span>
-                                <span class="interest-tag">Remote Sensing Cloud Image</span>
-                                <span class="interest-tag">Vector Font Generation</span>
-                                <span class="interest-tag">Characters Inpainting</span>
-                            </div>
-
-
-                            <!-- ==================== EDUCATION ==================== -->
-                            <h1 id="Education">
-                                <a href="#Education" class="headerlink"></a>
-                                <span data-lang="en">Education</span>
-                                <span data-lang="zh">教育经历</span>
-                            </h1>
-
-                            <!-- UMich -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div>
-                                        <div class="entry-title">
-                                            <span data-lang="en">University of Michigan, Ann Arbor</span>
-                                            <span data-lang="zh">密歇根大学安娜堡</span>
-                                        </div>
-                                        <div class="entry-subtitle">
-                                            <span data-lang="en">Master of Science in Data Science — LSA College</span>
-                                            <span data-lang="zh">数据科学理学硕士 — LSA学院</span>
-                                        </div>
-                                    </div>
-                                    <div style="text-align:right;">
-                                        <div class="entry-date">08/2025 – Present</div>
-                                        <div class="entry-location">
-                                            <span data-lang="en">Ann Arbor, MI, USA</span>
-                                            <span data-lang="zh">美国密歇根州安娜堡</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="entry-meta">
-                                    <span data-lang="en"><b>GPA:</b> 4.0 / 4.0</span>
-                                    <span data-lang="zh"><b>GPA：</b>4.0 / 4.0</span>
-                                </div>
-                            </div>
-
-                            <!-- Tongji -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div>
-                                        <div class="entry-title">
-                                            <span data-lang="en">Tongji University</span>
-                                            <span data-lang="zh">同济大学</span>
-                                        </div>
-                                        <div class="entry-subtitle">
-                                            <span data-lang="en">Bachelor of Engineering — Data Science and Big Data Technology</span>
-                                            <span data-lang="zh">工学学士 — 数据科学与大数据技术</span>
-                                        </div>
-                                    </div>
-                                    <div style="text-align:right;">
-                                        <div class="entry-date">09/2020 – 07/2025</div>
-                                        <div class="entry-location">
-                                            <span data-lang="en">Shanghai, China</span>
-                                            <span data-lang="zh">中国·上海</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="entry-meta">
-                                    <span data-lang="en"><b>GPA:</b> 93.18/100 (4.76/5.0) &nbsp;|&nbsp; <b>Core GPA:</b> 94.54/100 (4.95/5.0)</span>
-                                    <span data-lang="zh"><b>GPA：</b>93.18/100（4.76/5.0）&nbsp;|&nbsp;<b>专业核心课GPA：</b>94.54/100（4.95/5.0）</span>
-                                </div>
-                                <div class="entry-meta" style="margin-top:6px;">
-                                    <b><span data-lang="en">Scholarships:</span><span data-lang="zh">奖学金：</span></b><br>
-                                    <span class="schol-tag">
-                                        <span data-lang="en">First-class Outstanding Undergraduate Scholarship (12/2021)</span>
-                                        <span data-lang="zh">优秀本科生一等奖学金（2021.12）</span>
-                                    </span>
-                                    <span class="schol-tag">
-                                        <span data-lang="en">Third-class Outstanding Undergraduate Scholarship (12/2022)</span>
-                                        <span data-lang="zh">优秀本科生三等奖学金（2022.12）</span>
-                                    </span>
-                                    <span class="schol-tag">
-                                        <span data-lang="en">Second-class International Exchange Scholarship (03/2024)</span>
-                                        <span data-lang="zh">港澳台及国际交流生奖学金二等（2024.03）</span>
-                                    </span>
-                                    <span class="schol-tag">
-                                        <span data-lang="en">Second-class Outstanding Undergraduate Scholarship (11/2024)</span>
-                                        <span data-lang="zh">优秀本科生二等奖学金（2024.11）</span>
-                                    </span>
-                                </div>
-                                <div class="entry-meta" style="margin-top:4px;">
-                                    <b><span data-lang="en">Honor:</span><span data-lang="zh">荣誉：</span></b>
-                                    <span data-lang="en">Outstanding Undergraduate Student (03/2022)</span>
-                                    <span data-lang="zh">优秀本科生（2022.03）</span>
-                                </div>
-                            </div>
-
-                            <!-- NTU -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div>
-                                        <div class="entry-title">
-                                            <span data-lang="en">National Taiwan University</span>
-                                            <span data-lang="zh">国立台湾大学</span>
-                                        </div>
-                                        <div class="entry-subtitle">
-                                            <span data-lang="en">Exchange Program — Dept. of Electrical Engineering</span>
-                                            <span data-lang="zh">交换项目 — 电机工程学系</span>
-                                        </div>
-                                    </div>
-                                    <div style="text-align:right;">
-                                        <div class="entry-date">02/2023 – 06/2023</div>
-                                        <div class="entry-location">
-                                            <span data-lang="en">Taipei, China</span>
-                                            <span data-lang="zh">中国·台北</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="entry-meta">
-                                    <b>GPA:</b> 3.86 / 4.3
-                                </div>
-                            </div>
-
-
-                            <!-- ==================== PUBLICATIONS ==================== -->
-                            <h1 id="Publications">
-                                <a href="#Publications" class="headerlink"></a>
-                                <span data-lang="en">Publications</span>
-                                <span data-lang="zh">发表成果</span>
-                            </h1>
-
-                            <!-- 2026 under review -->
-                            <div class="pub-entry">
-                                <span class="pub-venue" style="background:#7c5cbf;">TMLR Sub.</span>
-                                <b>Yifan Zhang</b>, Yuren Wang, Yunta Hsieh, Xin Wang, Ping Zhang, Ziyi Yang, Jianing Ma, Zesen Zhao, Boyuan Zheng, Hei Ting Una Chan, Jiarui Li, Xueshen Liu, Kunxiao Gao, Yanheng Shang, Ruoyan Zhang, Ruiyao Liu, Jingxuan Zhang, Junchen Li, Zhongwei Wan, Ziheng Zhang <i>et al.</i> (2026).
-                                "Speculative Decoding for Multimodal Models: A Survey."
-                                <i>Submitted to TMLR</i>, Apr 2026.
-                                <a href="https://www.preprints.org/manuscript/202603.2344" target="_blank">Preprints.org</a>
-                            </div>
-                            <div class="pub-entry">
-                                <span class="pub-venue" style="background:#7c5cbf;">ECCV'26 Sub.</span>
-                                Hui Shen, Xin Wang, Ping Zhang, Yunta Hsieh, Boyuan Zheng, Qi Han, Zhongwei Wan, Ziheng Zhang, Jingxuan Zhang, Jing Xiong, Ziyuan Liu, <b>Yifan Zhang</b>, Hangrui Cao, Chenyang Zhao, Mi Zhang (2026).
-                                "MMSpec: Benchmarking Speculative Decoding for Vision-Language Models."
-                                <i>ECCV 2026 Conference Submission</i>, Feb 2026.
-                                <a href="https://arxiv.org/abs/2603.14989" target="_blank">arXiv:2603.14989</a>
-                            </div>
-                            <div class="pub-entry">
-                                <span class="pub-venue" style="background:#7c5cbf;">ECCV'26 Sub.</span>
-                                Ruiyao Liu, Hui Shen, Ping Zhang, Yunta Hsieh, <b>Yifan Zhang</b>, Jing Xu, Sicheng Chen, Junchen Li, Jiawei Lu, Jianing Ma, Jiaqi Mo, Qi Han, Zhen Zhang, Zhongwei Wan, Jing Xiong, Xin Wang, Ziyuan Liu, Hangrui Cao, Ngai Wong (2026).
-                                "MathGen: Benchmarking Mathematical Generation for Text-to-Image Models."
-                                <i>ECCV 2026 Conference Submission</i>, Feb 2026.
-                                <a href="https://arxiv.org/abs/2603.27959" target="_blank">arXiv:2603.27959</a>
-                            </div>
-                            <div class="pub-entry">
-                                <span class="pub-venue" style="background:#e07b39;">Preprint</span>
-                                <b>Yifan Zhang</b>, Qian Chen, Yi Liu, Wengen Li, Jihong Guan (2026).
-                                "SADER: Structure-Aware Diffusion Framework with DEterministic Resampling for Multi-Temporal Remote Sensing Cloud Removal."
-                                <i>arXiv preprint arXiv:2602.00536</i>, 2026.
-                                <a href="https://arxiv.org/abs/2602.00536" target="_blank">arXiv:2602.00536</a>
-                            </div>
-
-                            <!-- 2025–2026 conference submissions -->
-                            <div class="pub-entry">
-                                <span class="pub-venue" style="background:#7c5cbf;">CVPR'26 Sub.</span>
-                                Jiawei Ma, Haolong Li, <b>Yifan Zhang</b>, Song Yang, Chen Ye (2025).
-                                "Autoregressive Extraction of Chinese Character Strokes with Diffusion Models."
-                                <i>CVPR 2026 Conference Submission</i>, Dec 2025.
-                            </div>
-
-                            <!-- Published papers -->
-                            <div class="pub-entry">
-                                <span class="pub-venue">AAAI'24</span>
-                                Haolong Li, Chenghao Du, Ziheng Jiang, <b>Yifan Zhang</b>, Jiawei Ma, Chen Ye (2024).
-                                "Towards Automated Chinese Ancient Character Restoration: A Diffusion-Based Method with a New Dataset."
-                                <i>Proceedings of the AAAI Conference on Artificial Intelligence</i>, 38(4): 3073–3081.
-                                <a href="https://doi.org/10.1609/aaai.v38i4.28090" target="_blank">doi:10.1609/aaai.v38i4.28090</a>
-                            </div>
-                            <div class="pub-entry">
-                                <span class="pub-venue">ICBASE'24</span>
-                                Shatong Zhu, <b>Yifan Zhang</b> (2023).
-                                "Coordinated Optimization and Configuration Optimization of Wind, Photovoltaics and Energy Storage based on Particle Swarm Optimization Algorithm."
-                                <i>ICBASE 2024</i>, Dec 2023.
-                            </div>
-
-                            <!-- Patents -->
-                            <div class="pub-entry">
-                                <span class="pub-venue" style="background:#6aab6a;">Patent</span>
-                                <span data-lang="en">[Filed, 3rd author] A Cold Diffusion Model-based Method for Restoration of Inscription Text</span>
-                                <span data-lang="zh">【已申请，第三作者】基于冷扩散模型的碑文文字修复方法</span>
-                            </div>
-                            <div class="pub-entry">
-                                <span class="pub-venue" style="background:#6aab6a;">Patent</span>
-                                <span data-lang="en">[Filed, 2nd author] A Method to Synthesize an Ancient Chinese Inscription Dataset That Simulates Real Erosion</span>
-                                <span data-lang="zh">【已申请，第二作者】一种模拟真实侵蚀效果的古代汉字碑刻数据集合成方法</span>
-                            </div>
-
-
-                            <!-- ==================== RESEARCH ==================== -->
-                            <h1 id="Research">
-                                <a href="#Research" class="headerlink"></a>
-                                <span data-lang="en">Research Experience</span>
-                                <span data-lang="zh">科研经历</span>
-                            </h1>
-
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div>
-                                        <div class="entry-title">
-                                            <span data-lang="en">Key Laboratory of Embedded System and Service Computing, Ministry of Education — Tongji University</span>
-                                            <span data-lang="zh">教育部嵌入式系统与服务计算重点实验室 — 同济大学</span>
-                                        </div>
-                                        <div class="entry-subtitle">
-                                            <span data-lang="en">Undergraduate Researcher &nbsp;|&nbsp; Supervisor: Prof. Chen Ye</span>
-                                            <span data-lang="zh">本科研究员 &nbsp;|&nbsp; 指导教师：叶晨 教授</span>
-                                        </div>
-                                    </div>
-                                    <div class="entry-date">10/2022 – Present</div>
-                                </div>
-
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Introduced a new Chinese Ancient Rubbing and Manuscript Character Dataset (<b>ARMCD</b>), comprising 15,553 real-world ancient single-character images across 42 rubbings and manuscripts.</li>
-                                    <li>Provided synthetic masks by overlaying local erosion region masks extracted from real-world eroded images.</li>
-                                    <li>Proposed a cold diffusion model-based method called <b>DiffACR</b> (Diffusion Model for Automated Chinese Ancient Character Restoration) for the ACACR task by treating synthesis of eroded images as a special form of cold diffusion on pristine images.</li>
-                                    <li>Extracted prior masks directly from eroded images to guide the restoration process.</li>
-                                    <li>Published one conference paper (AAAI'24); completed 2 derivative design patents (currently under review).</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>构建了新的古代碑刻与手稿汉字数据集 <b>ARMCD</b>，收录来自42种碑刻与手稿的15,553张真实汉字图像。</li>
-                                    <li>通过叠加真实侵蚀图像的局部侵蚀区域掩码，生成合成掩码用于训练。</li>
-                                    <li>提出基于冷扩散模型的方法 <b>DiffACR</b>，以端到端方式实现自动化古汉字修复（ACACR任务）。</li>
-                                    <li>从侵蚀图像中直接提取先验掩码，为修复区域提供更精确的引导信息。</li>
-                                    <li>已发表AAAI'24论文一篇；完成2项外观设计专利（审查中）。</li>
-                                </ul>
-                            </div>
-
-
-                            <!-- ==================== PROJECTS ==================== -->
-                            <h1 id="Projects">
-                                <a href="#Projects" class="headerlink"></a>
-                                <span data-lang="en">Project Experience</span>
-                                <span data-lang="zh">项目经历</span>
-                            </h1>
-
-                            <!-- KG Project -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div class="entry-title">
-                                        <span data-lang="en">Automatic Construction of Knowledge Graphs based on Wikipedia</span>
-                                        <span data-lang="zh">基于维基百科的知识图谱自动构建</span>
-                                    </div>
-                                    <div class="entry-date">07/2024 – 08/2024</div>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Conducted zero-shot named entity recognition and relation extraction using pre-trained language models (BERT-based CKIP, Ernie-based UIE, MetaNER), extracting 21,960 entities of 19 types from Chinese Wikipedia.</li>
-                                    <li>Performed zero-shot knowledge triplet extraction via OpenNRE and Ernie-UIE, extracting 3,999 inter-entity relationships and entity attributes.</li>
-                                    <li>Performed entity merging and disambiguation using context-based and SimBERT-based knowledge embeddings.</li>
-                                    <li>Built a knowledge graph with Neo4J to visualize entities, relationships, and attributes.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>使用预训练语言模型（BERT系CKIP、Ernie-UIE、MetaNER）进行零样本命名实体识别与关系抽取，从中文维基百科提取19类共21,960个实体。</li>
-                                    <li>通过OpenNRE和Ernie-UIE进行知识三元组抽取，提取3,999条实体间关系及属性。</li>
-                                    <li>利用上下文嵌入和SimBERT知识嵌入完成实体消歧与合并。</li>
-                                    <li>使用Neo4J构建并可视化知识图谱，展示实体、关系及属性信息。</li>
-                                </ul>
-                            </div>
-
-                            <!-- Financial Big Data -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div class="entry-title">
-                                        <span data-lang="en">Research on Financial Big Data based on Machine Learning</span>
-                                        <span data-lang="zh">基于机器学习的金融大数据研究</span>
-                                    </div>
-                                    <div class="entry-date">07/2024 – 08/2024</div>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Collected CSI 300 index stock data; performed data preprocessing and feature engineering.</li>
-                                    <li>Applied deep learning models (RNN, LSTM, CNN, Transformer) for time-series analysis and stock price forecasting.</li>
-                                    <li>Trained and evaluated models, plotted learning curves, and compared model performance.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>采集沪深300指数股票数据，进行数据预处理和特征工程。</li>
-                                    <li>使用RNN、LSTM、CNN、Transformer等深度学习模型进行时序分析和股价预测。</li>
-                                    <li>完成模型训练与测试，绘制学习曲线，对比各模型性能。</li>
-                                </ul>
-                            </div>
-
-                            <!-- LLM in SE -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div class="entry-title">
-                                        <span data-lang="en">Large Language Models in Software Engineering Development Lifecycle</span>
-                                        <span data-lang="zh">大语言模型在软件工程生命周期中的应用</span>
-                                    </div>
-                                    <div class="entry-date">05/2024 – 07/2024</div>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Conducted a comprehensive survey on LLM applications across the software engineering lifecycle (planning, design, development, testing, maintenance).</li>
-                                    <li>Explored LLM support for requirements extraction, code generation, test case creation, code review, and vulnerability repair.</li>
-                                    <li>Analyzed potential benefits and challenges of LLM-assisted software engineering.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>对LLM在软件工程全生命周期（规划、设计、开发、测试、维护）中的应用进行系统调研。</li>
-                                    <li>探讨LLM在需求提取、代码生成、测试用例创建、代码审查及漏洞修复等方面的支持能力。</li>
-                                    <li>分析LLM辅助软件工程的潜在优势与挑战。</li>
-                                </ul>
-                            </div>
-
-                            <!-- Vessel Monitoring -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div class="entry-title">
-                                        <span data-lang="en">Intelligent Vessel Monitoring System</span>
-                                        <span data-lang="zh">智能船舶监控系统</span>
-                                    </div>
-                                    <div class="entry-date">02/2024 – 07/2024</div>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Developed a comprehensive real-time vessel information and trajectory management platform with monitoring and status analysis features.</li>
-                                    <li>Collected marine vessel data; preprocessed features and stored data using Django's database backend.</li>
-                                    <li>Designed CRUD functionality and implemented chart visualization with front-end/back-end interaction, enabling real-time query.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>开发实时船舶信息与轨迹管理平台，实现船舶运行状态监控与分析。</li>
-                                    <li>采集海洋船舶数据进行预处理，使用Django数据库进行存储管理。</li>
-                                    <li>设计增删改查功能，通过前后端交互实现图表可视化与实时查询。</li>
-                                </ul>
-                            </div>
-
-                            <!-- Texas Hold'em -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div class="entry-title">
-                                        <span data-lang="en">AI Algorithm Simulation for Texas Hold'em</span>
-                                        <span data-lang="zh">德州扑克AI算法仿真</span>
-                                    </div>
-                                    <div class="entry-date">03/2023 – 07/2023</div>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Implemented a reinforcement learning algorithm using D3QN and Monte Carlo methods to simulate Texas Hold'em and calculate win/loss ratios.</li>
-                                    <li>Achieved AI-based strategy selection in Texas Hold'em gameplay.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>使用D3QN与蒙特卡洛方法实现强化学习算法，模拟德州扑克并计算胜负率。</li>
-                                    <li>实现基于AI的策略选择，提升德州扑克游戏决策能力。</li>
-                                </ul>
-                            </div>
-
-                            <!-- Financial Fraud -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div class="entry-title">
-                                        <span data-lang="en">Research on Dynamic Social Networks in Financial Fraud Detection &amp; Prevention</span>
-                                        <span data-lang="zh">动态社会网络在金融欺诈检测中的研究</span>
-                                    </div>
-                                    <div class="entry-date">10/2022 – 12/2022</div>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Processed docking point features and enriched graph nodes/edges through feature engineering.</li>
-                                    <li>Applied multiple GNN variants (GCN, GAT, GAT-V2, SAGE, EMBSAGE) for financial fraud detection.</li>
-                                    <li>Compared accuracy and efficiency across models.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>处理对接点特征，通过特征工程丰富图节点和边的属性信息。</li>
-                                    <li>使用多种图神经网络变体（GCN、GAT、GAT-V2、SAGE、EMBSAGE）进行金融欺诈检测。</li>
-                                    <li>比较分析各模型的准确率与效率。</li>
-                                </ul>
-                            </div>
-
-                            <!-- Criminal Sentence -->
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div class="entry-title">
-                                        <span data-lang="en">Prediction of Criminal Sentence Reduction Length</span>
-                                        <span data-lang="zh">罪犯减刑时长预测</span>
-                                    </div>
-                                    <div class="entry-date">09/2022 – 12/2025</div>
-                                </div>
-
-                                <!-- Phase 1 -->
-                                <div class="entry-subtitle" style="margin-top:6px; margin-bottom:4px;">
-                                    <span data-lang="en">Phase 1 — CCF Big Data &amp; Computing Intelligence Contest &nbsp;|&nbsp; Tongji University</span>
-                                    <span data-lang="zh">第一阶段 — CCF大数据与计算智能大赛 &nbsp;|&nbsp; 同济大学</span>
-                                    <span class="entry-date" style="float:right; font-style:normal;">09/2022 – 12/2022</span>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Applied Ensemble Learning with text processing; fine-tuned pre-trained ERNIE model; extended training set via text-translation data augmentation.</li>
-                                    <li>Achieved <b>Rank 7 / 381 teams</b> in the 10th CCF Big Data &amp; Computing Intelligence Contest — National Division.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>采用集成学习结合文本处理，微调预训练ERNIE模型；通过文本翻译进行数据增强扩充训练集。</li>
-                                    <li>获第十届CCF大数据与计算智能大赛全国赛道<b>全国第7名（共381支队伍）</b>。</li>
-                                </ul>
-
-                                <!-- Phase 2 -->
-                                <div class="entry-subtitle" style="margin-top:10px; margin-bottom:4px;">
-                                    <span data-lang="en">Phase 2 — University of Michigan, Ann Arbor &nbsp;|&nbsp; Supervisor: Prof. David Jurgens</span>
-                                    <span data-lang="zh">第二阶段 — 密歇根大学安娜堡 &nbsp;|&nbsp; 指导教师：David Jurgens 教授</span>
-                                    <span class="entry-date" style="float:right; font-style:normal;">09/2025 – 12/2025</span>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Extended the task to <b>U.S. federal sentencing downward departure prediction</b> using the Monitoring of Federal Criminal Sentences dataset; designed a full preprocessing pipeline including departure filtering, feature consolidation, and ordinal target transformation.</li>
-                                    <li>Compared 6 models spanning classical ML (ElasticNet, XGBoost, CatBoost) and deep learning (LSTM, BERT, ERNIE); BERT achieved the best overall performance by leveraging contextualized representations of synthesized fact text.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>将任务扩展至<b>美国联邦量刑下行偏离预测</b>，使用联邦刑事量刑监测数据集，设计完整预处理流程，包括案例筛选、特征整合与目标变量序数化转换。</li>
-                                    <li>对比6种模型（ElasticNet、XGBoost、CatBoost；LSTM、BERT、ERNIE），通过将结构化特征转化为事实文本，BERT凭借上下文感知表示取得最佳整体效果。</li>
-                                </ul>
-                            </div>
-
-
-                            <!-- ==================== INTERNSHIP ==================== -->
-                            <h1 id="Internship">
-                                <a href="#Internship" class="headerlink"></a>
-                                <span data-lang="en">Internship</span>
-                                <span data-lang="zh">实习经历</span>
-                            </h1>
-
-                            <div class="entry-block">
-                                <div class="entry-header">
-                                    <div>
-                                        <div class="entry-title">
-                                            <span data-lang="en">Baidu — Software Engineer</span>
-                                            <span data-lang="zh">百度 — 开发工程师</span>
-                                        </div>
-                                    </div>
-                                    <div style="text-align:right;">
-                                        <div class="entry-date">07/2024 – 08/2024</div>
-                                        <div class="entry-location">
-                                            <span data-lang="en">Beijing, China</span>
-                                            <span data-lang="zh">中国·北京</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="entry-bullet lang-block-en">
-                                    <li>Wrote functional test cases and conducted functional testing of Baidu Cloud Compute (BCC) in 3212 Haiguang and Haiyang intelligent computing environments.</li>
-                                    <li>Carried out performance testing (memory, CPU, disk, system) and compared performance across different versions of Haiguang hardware.</li>
-                                    <li>Studied the system architecture, API, and back-end development principles of cloud computing servers.</li>
-                                </ul>
-                                <ul class="entry-bullet lang-block-zh">
-                                    <li>编写功能测试用例，在3212海光与海洋智能计算环境中对百度云计算（BCC）进行功能测试。</li>
-                                    <li>开展内存、CPU、磁盘、系统等维度的性能测试，比较不同版本海光硬件的性能差异。</li>
-                                    <li>学习云计算服务器的系统架构、API接口及后端开发原理。</li>
-                                </ul>
-                            </div>
-
-
-                            <!-- ==================== AWARDS ==================== -->
-                            <h1 id="Awards">
-                                <a href="#Awards" class="headerlink"></a>
-                                <span data-lang="en">Honors &amp; Awards</span>
-                                <span data-lang="zh">荣誉与奖项</span>
-                            </h1>
-
-                            <ul class="award-list lang-block-en">
-                                <li><span class="award-name">Second Prize, The 16th "Chinese Society for Electrical Engineering Cup" National University Students Electrical Math Modeling Competition</span><span class="award-date">05/2024</span></li>
-                                <li><span class="award-name">Second Prize (Non-mathematical Category), The 14th National Student Mathematics Competition</span><span class="award-date">01/2023</span></li>
-                                <li><span class="award-name">Rank 7/381, The 10th CCF Big Data &amp; Computing Intelligence Contest — National Division, "Prediction of Criminal Sentence Reduction Length"</span><span class="award-date">12/2022</span></li>
-                                <li><span class="award-name">Second Prize (Non-mathematical Category), The 14th Shanghai Mathematics Competition for College Students (Higher Education Community Cup)</span><span class="award-date">12/2022</span></li>
-                                <li><span class="award-name">Third Prize, China Undergraduate Mathematical Contest in Modeling — Shanghai</span><span class="award-date">12/2021</span></li>
-                                <li><span class="award-name">Third Prize (Non-Physics A), The 38th National Physics Competition for College Students — Shanghai</span><span class="award-date">12/2021</span></li>
-                                <li><span class="award-name">Second Prize in Non-Physics Category, Tongji University Physics Competition</span><span class="award-date">10/2021</span></li>
-                                <li><span class="award-name">Third Prize of Undergraduate Group, The 11th MathorCup College Mathematical Modeling Challenge</span><span class="award-date">06/2021</span></li>
-                                <li><span class="award-name">Third Prize, Tongji University Mathematical Contest in Modeling</span><span class="award-date">06/2021</span></li>
-                            </ul>
-                            <ul class="award-list lang-block-zh">
-                                <li><span class="award-name">二等奖，第十六届"中国电机工程学会杯"全国高校电工数学建模竞赛</span><span class="award-date">2024.05</span></li>
-                                <li><span class="award-name">二等奖（非数学专业组），第十四届全国大学生数学竞赛</span><span class="award-date">2023.01</span></li>
-                                <li><span class="award-name">全国第7名（381支队伍），第十届CCF大数据与计算智能大赛 — "罪犯减刑时长预测"赛道</span><span class="award-date">2022.12</span></li>
-                                <li><span class="award-name">二等奖（非数学专业组），第十四届上海市高校大学生数学竞赛（高教社杯）</span><span class="award-date">2022.12</span></li>
-                                <li><span class="award-name">三等奖，中国本科数学建模竞赛上海赛区</span><span class="award-date">2021.12</span></li>
-                                <li><span class="award-name">三等奖（非物理专业A类），第三十八届全国高中物理竞赛上海赛区</span><span class="award-date">2021.12</span></li>
-                                <li><span class="award-name">二等奖（非物理专业组），同济大学物理竞赛</span><span class="award-date">2021.10</span></li>
-                                <li><span class="award-name">本科生组三等奖，第十一届MathorCup高校数学建模挑战赛</span><span class="award-date">2021.06</span></li>
-                                <li><span class="award-name">三等奖，同济大学数学建模竞赛</span><span class="award-date">2021.06</span></li>
-                            </ul>
-
-
-                            <!-- ==================== SKILLS ==================== -->
-                            <h1 id="Skills">
-                                <a href="#Skills" class="headerlink"></a>
-                                <span data-lang="en">Skills &amp; Hobbies</span>
-                                <span data-lang="zh">技能与爱好</span>
-                            </h1>
-
-                            <div class="skills-grid">
-                                <span class="skill-label">
-                                    <span data-lang="en">Computer Skills</span>
-                                    <span data-lang="zh">计算机技能</span>
-                                </span>
-                                <span class="skill-value">C++, C, Python, MySQL, C#, SQL Server, JavaScript, HTML, CSS</span>
-
-                                <span class="skill-label">
-                                    <span data-lang="en">Languages</span>
-                                    <span data-lang="zh">语言能力</span>
-                                </span>
-                                <span class="skill-value">
-                                    <span data-lang="en">Chinese (native) &nbsp;|&nbsp; English (proficient, IELTS 7.5)</span>
-                                    <span data-lang="zh">中文（母语）&nbsp;|&nbsp;英语（熟练，IELTS 7.5）</span>
-                                </span>
-
-                                <span class="skill-label">
-                                    <span data-lang="en">Hobbies</span>
-                                    <span data-lang="zh">爱好</span>
-                                </span>
-                                <span class="skill-value">
-                                    <span data-lang="en">Calligraphy (Level 10) &nbsp;|&nbsp; Accordion (Level 7)</span>
-                                    <span data-lang="zh">书法（十级）&nbsp;|&nbsp;手风琴（七级）</span>
-                                </span>
-                            </div>
-
-                            <p style="margin-top:30px;"></p>
-
-                        </div><!-- /post-content -->
-                    </div><!-- /post -->
-                    <script src="./js/visitors.js"></script>
-                </div>
+            <div class="entry-meta"> <span data-lang="en" lang="en"><b>GPA:</b> 93.18/100 (4.76/5.0) | <b>Core GPA:</b> 94.54/100 (4.95/5.0)</span> <span data-lang="zh" lang="zh-CN"><b>GPA：</b>93.18/100（4.76/5.0） | <b>专业核心课GPA：</b>94.54/100（4.95/5.0）</span> </div>
+            <div class="entry-meta" style="margin-top:6px;"> <b><span data-lang="en" lang="en">Scholarships:</span><span data-lang="zh" lang="zh-CN">奖学金：</span></b><br/> <span class="schol-tag"> <span data-lang="en" lang="en">First-class Outstanding Undergraduate Scholarship (Dec 2021)</span> <span data-lang="zh" lang="zh-CN">优秀本科生一等奖学金（2021 年 12 月）</span> </span> <span class="schol-tag"> <span data-lang="en" lang="en">Third-class Outstanding Undergraduate Scholarship (Dec 2022)</span> <span data-lang="zh" lang="zh-CN">优秀本科生三等奖学金（2022 年 12 月）</span> </span> <span class="schol-tag"> <span data-lang="en" lang="en">Second-class International Exchange Scholarship (Mar 2024)</span> <span data-lang="zh" lang="zh-CN">港澳台及国际交流生奖学金二等（2024 年 3 月）</span> </span> <span class="schol-tag"> <span data-lang="en" lang="en">Second-class Outstanding Undergraduate Scholarship (Nov 2024)</span> <span data-lang="zh" lang="zh-CN">优秀本科生二等奖学金（2024 年 11 月）</span> </span> </div>
+            <div class="entry-meta" style="margin-top:4px;"> <b><span data-lang="en" lang="en">Honor:</span><span data-lang="zh" lang="zh-CN">荣誉：</span></b> <span data-lang="en" lang="en">Outstanding Undergraduate Student (Mar 2022)</span> <span data-lang="zh" lang="zh-CN">优秀本科生（2022 年 3 月）</span> </div>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <div>
+                <h3 class="entry-title"> <span data-lang="en" lang="en">National Taiwan University</span> <span data-lang="zh" lang="zh-CN">国立台湾大学</span> </h3>
+                <div class="entry-subtitle"> <span data-lang="en" lang="en">Exchange Student · Department of Electrical Engineering</span> <span data-lang="zh" lang="zh-CN">交换生 · 电机工程学系</span> </div>
+              </div>
+              <div style="text-align:right;">
+                <div class="entry-date"><span data-lang="en" lang="en">Feb 2023 – Jun 2023</span><span data-lang="zh" lang="zh-CN">2023 年 2 月 – 2023 年 6 月</span></div>
+                <div class="entry-location"> <span data-lang="en" lang="en">Taipei, China</span> <span data-lang="zh" lang="zh-CN">中国·台北</span> </div>
+              </div>
             </div>
-        </div>
+            <div class="entry-meta"> <b>GPA:</b> 3.86 / 4.3 </div>
+          </div>
+        </section>
+        <section aria-labelledby="Research-title" class="section" id="Research">
+          <h2 class="section-title" id="Research-title"><span data-lang="en" lang="en">Research Experience</span><span data-lang="zh" lang="zh-CN">科研经历</span></h2>
+          <div class="entry-block">
+            <div class="entry-header">
+              <div>
+                <h3 class="entry-title"> <span data-lang="en" lang="en">Key Laboratory of Embedded System and Service Computing, Ministry of Education — Tongji University</span> <span data-lang="zh" lang="zh-CN">教育部嵌入式系统与服务计算重点实验室 — 同济大学</span> </h3>
+                <div class="entry-subtitle"> <span data-lang="en" lang="en">Researcher | Supervisor: Prof. Chen Ye</span> <span data-lang="zh" lang="zh-CN">研究人员 | 指导教师：叶晨 教授</span> </div>
+              </div>
+              <div class="entry-date"><span data-lang="en" lang="en">Oct 2022 – Present</span><span data-lang="zh" lang="zh-CN">2022 年 10 月 – 至今</span></div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Introduced a new Chinese Ancient Rubbing and Manuscript Character Dataset (<b>ARMCD</b>), comprising 15,553 real-world ancient single-character images across 42 rubbings and manuscripts.</li>
+              <li>Provided synthetic masks by overlaying local erosion region masks extracted from real-world eroded images.</li>
+              <li>Proposed a cold diffusion model-based method called <b>DiffACR</b> (Diffusion Model for Automated Chinese Ancient Character Restoration) for the ACACR task by treating synthesis of eroded images as a special form of cold diffusion on pristine images.</li>
+              <li>Extracted prior masks directly from eroded images to guide the restoration process.</li>
+              <li>Coauthored a paper published at AAAI 2024 and contributed to two patent applications.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>构建了新的古代碑刻与手稿汉字数据集 <b>ARMCD</b>，收录来自42种碑刻与手稿的15,553张真实汉字图像。</li>
+              <li>通过叠加真实侵蚀图像的局部侵蚀区域掩码，生成合成掩码用于训练。</li>
+              <li>提出基于冷扩散模型的方法 <b>DiffACR</b>，以端到端方式实现自动化古汉字修复（ACACR任务）。</li>
+              <li>从侵蚀图像中直接提取先验掩码，为修复区域提供更精确的引导信息。</li>
+              <li>合作论文发表于 AAAI 2024，并参与两项专利申请。</li>
+            </ul>
+          </div>
+        </section>
+        <section aria-labelledby="Internship-title" class="section" id="Internship">
+          <h2 class="section-title" id="Internship-title"><span data-lang="en" lang="en">Internship Experience</span><span data-lang="zh" lang="zh-CN">实习经历</span></h2>
+          <div class="entry-block">
+            <div class="entry-header">
+              <div>
+                <h3 class="entry-title">Touchstone AI</h3>
+                <div class="entry-subtitle"><span data-lang="en" lang="en">Research Intern</span><span data-lang="zh" lang="zh-CN">研究实习生</span></div>
+              </div>
+              <div class="entry-date"><span data-lang="en" lang="en">May 29 – Oct 16, 2026</span><span data-lang="zh" lang="zh-CN">2026 年 5 月 29 日 – 10 月 16 日</span></div>
+            </div>
+            <div class="entry-meta"><span data-lang="en" lang="en">Supervisor: Hui Shen, Head of Benchmark Research Group</span><span data-lang="zh" lang="zh-CN">导师：Hui Shen，Benchmark Research Group 负责人</span></div>
+            <div class="entry-location"><span data-lang="en" lang="en">Remote · Beijing, China → Ann Arbor, MI, USA</span><span data-lang="zh" lang="zh-CN">远程实习 · 北京 → 美国密歇根州安娜堡</span></div>
+            <div class="pub-links"><a href="https://github.com/Touchstone-AI-Lab" rel="noopener noreferrer" target="_blank"><span data-lang="en" lang="en">Public GitHub organization</span><span data-lang="zh" lang="zh-CN">GitHub 公开主页</span></a></div>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <div>
+                <h3 class="entry-title"> <span data-lang="en" lang="en">Baidu · Software Engineering Intern</span> <span data-lang="zh" lang="zh-CN">百度 · 软件开发实习生</span> </h3>
+              </div>
+              <div style="text-align:right;">
+                <div class="entry-date"><span data-lang="en" lang="en">Jul 2024 – Aug 2024</span><span data-lang="zh" lang="zh-CN">2024 年 7 月 – 2024 年 8 月</span></div>
+                <div class="entry-location"> <span data-lang="en" lang="en">Beijing, China</span> <span data-lang="zh" lang="zh-CN">中国·北京</span> </div>
+              </div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Wrote functional test cases and conducted functional testing of Baidu Cloud Compute (BCC) in 3212 Haiguang and Haiyang intelligent computing environments.</li>
+              <li>Carried out performance testing (memory, CPU, disk, system) and compared performance across different versions of Haiguang hardware.</li>
+              <li>Studied the system architecture, API, and back-end development principles of cloud computing servers.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>编写功能测试用例，在3212海光与海洋智能计算环境中对百度云计算（BCC）进行功能测试。</li>
+              <li>开展内存、CPU、磁盘、系统等维度的性能测试，比较不同版本海光硬件的性能差异。</li>
+              <li>学习云计算服务器的系统架构、API接口及后端开发原理。</li>
+            </ul>
+          </div>
+        </section>
+        <section aria-labelledby="Projects-title" class="section" id="Projects">
+          <h2 class="section-title" id="Projects-title"><span data-lang="en" lang="en">Selected Projects</span><span data-lang="zh" lang="zh-CN">项目经历</span></h2>
+          <div class="entry-block">
+            <div class="entry-header">
+              <h3 class="entry-title"> <span data-lang="en" lang="en">Automatic Knowledge Graph Construction from Wikipedia</span> <span data-lang="zh" lang="zh-CN">基于维基百科的知识图谱自动构建</span> </h3>
+              <div class="entry-date"><span data-lang="en" lang="en">Jul 2024 – Aug 2024</span><span data-lang="zh" lang="zh-CN">2024 年 7 月 – 2024 年 8 月</span></div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Conducted zero-shot named entity recognition and relation extraction using pre-trained language models (BERT-based CKIP, ERNIE-based UIE, MetaNER), extracting 21,960 entities of 19 types from Chinese Wikipedia.</li>
+              <li>Performed zero-shot knowledge triplet extraction via OpenNRE and ERNIE-UIE, extracting 3,999 inter-entity relationships and entity attributes.</li>
+              <li>Performed entity merging and disambiguation using context-based and SimBERT-based knowledge embeddings.</li>
+              <li>Built a knowledge graph with Neo4j to visualize entities, relationships, and attributes.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>使用预训练语言模型（BERT系CKIP、ERNIE-UIE、MetaNER）进行零样本命名实体识别与关系抽取，从中文维基百科提取19类共21,960个实体。</li>
+              <li>通过OpenNRE和ERNIE-UIE进行知识三元组抽取，提取3,999条实体间关系及属性。</li>
+              <li>利用上下文嵌入和SimBERT知识嵌入完成实体消歧与合并。</li>
+              <li>使用Neo4j构建并可视化知识图谱，展示实体、关系及属性信息。</li>
+            </ul>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <h3 class="entry-title"> <span data-lang="en" lang="en">Machine Learning for Financial Time-Series Analysis</span> <span data-lang="zh" lang="zh-CN">基于机器学习的金融大数据研究</span> </h3>
+              <div class="entry-date"><span data-lang="en" lang="en">Jul 2024 – Aug 2024</span><span data-lang="zh" lang="zh-CN">2024 年 7 月 – 2024 年 8 月</span></div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Collected CSI 300 index stock data; performed data preprocessing and feature engineering.</li>
+              <li>Applied deep learning models (RNN, LSTM, CNN, Transformer) for time-series analysis and stock price forecasting.</li>
+              <li>Trained and evaluated models, plotted learning curves, and compared model performance.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>采集沪深300指数股票数据，进行数据预处理和特征工程。</li>
+              <li>使用RNN、LSTM、CNN、Transformer等深度学习模型进行时序分析和股价预测。</li>
+              <li>完成模型训练与测试，绘制学习曲线，对比各模型性能。</li>
+            </ul>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <h3 class="entry-title"> <span data-lang="en" lang="en">Large Language Models for the Software Development Lifecycle</span> <span data-lang="zh" lang="zh-CN">大语言模型在软件工程生命周期中的应用</span> </h3>
+              <div class="entry-date"><span data-lang="en" lang="en">May 2024 – Jul 2024</span><span data-lang="zh" lang="zh-CN">2024 年 5 月 – 2024 年 7 月</span></div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Surveyed LLM applications across the software development lifecycle, including planning, design, implementation, testing, and maintenance.</li>
+              <li>Explored LLM support for requirements extraction, code generation, test case creation, code review, and vulnerability repair.</li>
+              <li>Analyzed potential benefits and challenges of LLM-assisted software engineering.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>对LLM在软件工程全生命周期（规划、设计、开发、测试、维护）中的应用进行系统调研。</li>
+              <li>探讨LLM在需求提取、代码生成、测试用例创建、代码审查及漏洞修复等方面的支持能力。</li>
+              <li>分析LLM辅助软件工程的潜在优势与挑战。</li>
+            </ul>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <h3 class="entry-title"> <span data-lang="en" lang="en">Intelligent Vessel Monitoring System</span> <span data-lang="zh" lang="zh-CN">智能船舶监控系统</span> </h3>
+              <div class="entry-date"><span data-lang="en" lang="en">Feb 2024 – Jul 2024</span><span data-lang="zh" lang="zh-CN">2024 年 2 月 – 2024 年 7 月</span></div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Developed a real-time platform for vessel information, trajectory management, and operational status monitoring.</li>
+              <li>Collected marine vessel data; preprocessed features and stored data using Django's database backend.</li>
+              <li>Implemented data management, interactive charts, and real-time queries across the frontend and backend.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>开发实时船舶信息与轨迹管理平台，实现船舶运行状态监控与分析。</li>
+              <li>采集海洋船舶数据进行预处理，使用Django数据库进行存储管理。</li>
+              <li>设计增删改查功能，通过前后端交互实现图表可视化与实时查询。</li>
+            </ul>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <h3 class="entry-title"> <span data-lang="en" lang="en">Reinforcement Learning for Texas Hold'em</span> <span data-lang="zh" lang="zh-CN">德州扑克AI算法仿真</span> </h3>
+              <div class="entry-date"><span data-lang="en" lang="en">Mar 2023 – Jul 2023</span><span data-lang="zh" lang="zh-CN">2023 年 3 月 – 2023 年 7 月</span></div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Implemented a reinforcement learning algorithm using D3QN and Monte Carlo methods to simulate Texas Hold'em and calculate win/loss ratios.</li>
+              <li>Achieved AI-based strategy selection in Texas Hold'em gameplay.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>使用D3QN与蒙特卡洛方法实现强化学习算法，模拟德州扑克并计算胜负率。</li>
+              <li>实现基于AI的策略选择，提升德州扑克游戏决策能力。</li>
+            </ul>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <h3 class="entry-title"> <span data-lang="en" lang="en">Dynamic Social Networks for Financial Fraud Detection</span> <span data-lang="zh" lang="zh-CN">动态社会网络在金融欺诈检测中的研究</span> </h3>
+              <div class="entry-date"><span data-lang="en" lang="en">Oct 2022 – Dec 2022</span><span data-lang="zh" lang="zh-CN">2022 年 10 月 – 2022 年 12 月</span></div>
+            </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Engineered features to enrich graph node and edge representations.</li>
+              <li>Applied multiple GNN variants (GCN, GAT, GATv2, SAGE, EMBSAGE) for financial fraud detection.</li>
+              <li>Compared accuracy and efficiency across models.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>通过特征工程丰富图节点和边的属性信息。</li>
+              <li>使用多种图神经网络变体（GCN、GAT、GATv2、SAGE、EMBSAGE）进行金融欺诈检测。</li>
+              <li>比较分析各模型的准确率与效率。</li>
+            </ul>
+          </div>
+          <div class="entry-block">
+            <div class="entry-header">
+              <h3 class="entry-title"> <span data-lang="en" lang="en">Prediction of Criminal Sentence Reduction Length</span> <span data-lang="zh" lang="zh-CN">罪犯减刑时长预测</span> </h3>
+              <div class="entry-date"><span data-lang="en" lang="en">Sep 2022 – Dec 2025</span><span data-lang="zh" lang="zh-CN">2022 年 9 月 – 2025 年 12 月</span></div>
+            </div>
+            <div class="entry-subtitle" style="margin-top:6px; margin-bottom:4px;"> <span data-lang="en" lang="en">Phase 1 — CCF Big Data &amp; Computing Intelligence Contest | Tongji University</span> <span data-lang="zh" lang="zh-CN">第一阶段 — CCF大数据与计算智能大赛 | 同济大学</span> <span class="entry-date" style="float:right; font-style:normal;"><span data-lang="en" lang="en">Sep 2022 – Dec 2022</span><span data-lang="zh" lang="zh-CN">2022 年 9 月 – 2022 年 12 月</span></span> </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Combined ensemble learning with text preprocessing, fine-tuned ERNIE, and augmented the training set through translation.</li>
+              <li>Ranked <b>7th out of 381 teams</b> in the 10th CCF Big Data &amp; Computing Intelligence Contest — National Division.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>采用集成学习结合文本处理，微调预训练ERNIE模型；通过文本翻译进行数据增强扩充训练集。</li>
+              <li>获第十届CCF大数据与计算智能大赛全国赛道<b>全国第7名（共381支队伍）</b>。</li>
+            </ul>
+            <div class="entry-subtitle" style="margin-top:10px; margin-bottom:4px;"> <span data-lang="en" lang="en">Phase 2 — University of Michigan, Ann Arbor | Supervisor: Prof. David Jurgens</span> <span data-lang="zh" lang="zh-CN">第二阶段 — 密歇根大学安娜堡分校 | 指导教师：David Jurgens 教授</span> <span class="entry-date" style="float:right; font-style:normal;"><span data-lang="en" lang="en">Sep 2025 – Dec 2025</span><span data-lang="zh" lang="zh-CN">2025 年 9 月 – 2025 年 12 月</span></span> </div>
+            <ul class="entry-bullet lang-block-en" lang="en">
+              <li>Extended the task to <b>U.S. federal sentencing downward departure prediction</b> using the Monitoring of Federal Criminal Sentences dataset; designed a full preprocessing pipeline including departure filtering, feature consolidation, and ordinal target transformation.</li>
+              <li>Compared six models spanning classical machine learning (ElasticNet, XGBoost, CatBoost) and deep learning (LSTM, BERT, ERNIE); BERT achieved the best overall performance using contextualized representations of synthesized fact text.</li>
+            </ul>
+            <ul class="entry-bullet lang-block-zh" lang="zh-CN">
+              <li>将任务扩展至<b>美国联邦量刑下行偏离预测</b>，使用联邦刑事量刑监测数据集，设计完整预处理流程，包括案例筛选、特征整合与目标变量序数化转换。</li>
+              <li>对比6种模型（ElasticNet、XGBoost、CatBoost；LSTM、BERT、ERNIE），通过将结构化特征转化为事实文本，BERT凭借上下文感知表示取得最佳整体效果。</li>
+            </ul>
+          </div>
+        </section>
+        <section aria-labelledby="Awards-title" class="section" id="Awards">
+          <h2 class="section-title" id="Awards-title"><span data-lang="en" lang="en">Honors &amp; Awards</span><span data-lang="zh" lang="zh-CN">荣誉与奖项</span></h2>
+          <ul class="award-list lang-block-en" lang="en">
+            <li><span class="award-name">Second Prize, The 16th "Chinese Society for Electrical Engineering Cup" National University Students Electrical Math Modeling Competition</span><span class="award-date">May 2024</span></li>
+            <li><span class="award-name">Second Prize (Non-mathematical Category), The 14th National Student Mathematics Competition</span><span class="award-date">Jan 2023</span></li>
+            <li><span class="award-name">7th out of 381 teams, The 10th CCF Big Data &amp; Computing Intelligence Contest — National Division, "Prediction of Criminal Sentence Reduction Length"</span><span class="award-date">Dec 2022</span></li>
+            <li><span class="award-name">Second Prize (Non-mathematical Category), The 14th Shanghai Mathematics Competition for College Students (Higher Education Community Cup)</span><span class="award-date">Dec 2022</span></li>
+            <li><span class="award-name">Third Prize, China Undergraduate Mathematical Contest in Modeling — Shanghai</span><span class="award-date">Dec 2021</span></li>
+            <li><span class="award-name">Third Prize (Non-Physics A), The 38th National Physics Competition for College Students — Shanghai</span><span class="award-date">Dec 2021</span></li>
+            <li><span class="award-name">Second Prize in Non-Physics Category, Tongji University Physics Competition</span><span class="award-date">Oct 2021</span></li>
+            <li><span class="award-name">Third Prize of Undergraduate Group, The 11th MathorCup College Mathematical Modeling Challenge</span><span class="award-date">Jun 2021</span></li>
+            <li><span class="award-name">Third Prize, Tongji University Mathematical Contest in Modeling</span><span class="award-date">Jun 2021</span></li>
+          </ul>
+          <ul class="award-list lang-block-zh" lang="zh-CN">
+            <li><span class="award-name">二等奖，第十六届"中国电机工程学会杯"全国高校电工数学建模竞赛</span><span class="award-date">2024 年 5 月</span></li>
+            <li><span class="award-name">二等奖（非数学专业组），第十四届全国大学生数学竞赛</span><span class="award-date">2023 年 1 月</span></li>
+            <li><span class="award-name">全国第7名（381支队伍），第十届CCF大数据与计算智能大赛 — "罪犯减刑时长预测"赛道</span><span class="award-date">2022 年 12 月</span></li>
+            <li><span class="award-name">二等奖（非数学专业组），第十四届上海市高校大学生数学竞赛（高教社杯）</span><span class="award-date">2022 年 12 月</span></li>
+            <li><span class="award-name">三等奖，中国本科数学建模竞赛上海赛区</span><span class="award-date">2021 年 12 月</span></li>
+            <li><span class="award-name">三等奖（非物理专业 A 类），第三十八届全国大学生物理竞赛上海赛区</span><span class="award-date">2021 年 12 月</span></li>
+            <li><span class="award-name">二等奖（非物理专业组），同济大学物理竞赛</span><span class="award-date">2021 年 10 月</span></li>
+            <li><span class="award-name">本科生组三等奖，第十一届MathorCup高校数学建模挑战赛</span><span class="award-date">2021 年 6 月</span></li>
+            <li><span class="award-name">三等奖，同济大学数学建模竞赛</span><span class="award-date">2021 年 6 月</span></li>
+          </ul>
+        </section>
+        <section aria-labelledby="Skills-title" class="section" id="Skills">
+          <h2 class="section-title" id="Skills-title"><span data-lang="en" lang="en">Skills &amp; Interests</span><span data-lang="zh" lang="zh-CN">技能与爱好</span></h2>
+          <div class="skills-grid"> <span class="skill-label"> <span data-lang="en" lang="en">Programming &amp; Databases</span> <span data-lang="zh" lang="zh-CN">编程与数据库</span> </span> <span class="skill-value">C++, C, Python, MySQL, C#, SQL Server, JavaScript, HTML, CSS</span> <span class="skill-label"> <span data-lang="en" lang="en">Languages</span> <span data-lang="zh" lang="zh-CN">语言能力</span> </span> <span class="skill-value"> <span data-lang="en" lang="en">Chinese (native) | English (proficient, IELTS 7.5)</span> <span data-lang="zh" lang="zh-CN">中文（母语） | 英语（熟练，IELTS 7.5）</span> </span> <span class="skill-label"> <span data-lang="en" lang="en">Hobbies</span> <span data-lang="zh" lang="zh-CN">爱好</span> </span> <span class="skill-value"> <span data-lang="en" lang="en">Calligraphy (Level 10) | Accordion (Level 7)</span> <span data-lang="zh" lang="zh-CN">书法（十级） | 手风琴（七级）</span> </span> </div>
+        </section>
+      </main>
     </div>
-
-    <script src="./js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="./js/jquery.appear.js"></script>
-    <script src="./js/add-bookmark.js"></script>
-
-    <script>
-        // ===== Language Toggle Logic =====
-        let currentLang = 'en';
-
-        function toggleLang() {
-            currentLang = currentLang === 'en' ? 'zh' : 'en';
-            const body = document.getElementById('body-root');
-            const btnText = document.getElementById('lang-btn-text');
-
-            if (currentLang === 'zh') {
-                body.classList.add('zh');
-                btnText.textContent = 'English';
-                document.documentElement.lang = 'zh-CN';
-            } else {
-                body.classList.remove('zh');
-                btnText.textContent = '中文';
-                document.documentElement.lang = 'en';
-            }
-
-            // Save preference
-            try { localStorage.setItem('lang', currentLang); } catch(e) {}
-        }
-
-        // Restore saved preference on load
-        (function() {
-            try {
-                const saved = localStorage.getItem('lang');
-                if (saved === 'zh') toggleLang();
-            } catch(e) {}
-        })();
-    </script>
-
-    <!-- ===== Particles.js (github.com/VincentGarreau/particles.js) ===== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 60, density: { enable: true, value_area: 900 } },
-                color: { value: '#4786d6' },
-                shape: { type: 'circle' },
-                opacity: {
-                    value: 0.25,
-                    random: true,
-                    anim: { enable: true, speed: 0.6, opacity_min: 0.08, sync: false }
-                },
-                size: {
-                    value: 2.5,
-                    random: true,
-                    anim: { enable: false }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 140,
-                    color: '#4786d6',
-                    opacity: 0.12,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 0.8,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'grab' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
-                },
-                modes: {
-                    grab: { distance: 120, line_linked: { opacity: 0.35 } },
-                    push: { particles_nb: 3 }
-                }
-            },
-            retina_detect: true
-        });
-    </script>
-
-    <!-- ===== Click Burst Effect ===== -->
-    <script>
-        (function() {
-            const COLORS = ['#4786d6','#7c5cbf','#e07b39','#6aab6a','#f0a500','#e05c8a'];
-
-            function burst(x, y) {
-                // Ripple ring
-                const ring = document.createElement('div');
-                Object.assign(ring.style, {
-                    position: 'fixed', left: x+'px', top: y+'px',
-                    width: '8px', height: '8px', borderRadius: '50%',
-                    border: '2px solid ' + COLORS[Math.floor(Math.random()*COLORS.length)],
-                    pointerEvents: 'none', zIndex: '9999',
-                    transform: 'translate(-50%,-50%)',
-                    transition: 'all 0.55s cubic-bezier(.2,.8,.4,1)',
-                    opacity: '0.9'
-                });
-                document.body.appendChild(ring);
-                requestAnimationFrame(() => requestAnimationFrame(() => {
-                    ring.style.width  = '70px';
-                    ring.style.height = '70px';
-                    ring.style.opacity = '0';
-                }));
-                setTimeout(() => ring.remove(), 600);
-
-                // Dot particles
-                const count = 10;
-                for (let i = 0; i < count; i++) {
-                    const dot = document.createElement('div');
-                    const color = COLORS[Math.floor(Math.random()*COLORS.length)];
-                    const size  = (4 + Math.random()*5) + 'px';
-                    Object.assign(dot.style, {
-                        position: 'fixed', left: x+'px', top: y+'px',
-                        width: size, height: size, borderRadius: '50%',
-                        background: color, pointerEvents: 'none', zIndex: '9999',
-                        transform: 'translate(-50%,-50%)',
-                        transition: 'none', opacity: '1'
-                    });
-                    document.body.appendChild(dot);
-                    const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
-                    const dist  = 45 + Math.random() * 40;
-                    const dx = Math.cos(angle) * dist;
-                    const dy = Math.sin(angle) * dist;
-                    requestAnimationFrame(() => requestAnimationFrame(() => {
-                        dot.style.transition = 'all 0.65s cubic-bezier(.2,.8,.4,1)';
-                        dot.style.transform  = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
-                        dot.style.opacity    = '0';
-                        dot.style.width  = '2px';
-                        dot.style.height = '2px';
-                    }));
-                    setTimeout(() => dot.remove(), 700);
-                }
-
-                // Floating text emoji
-                const emojis = ['✦','★','•','◆','▲'];
-                const txt = document.createElement('span');
-                Object.assign(txt.style, {
-                    position: 'fixed', left: x+'px', top: y+'px',
-                    color: COLORS[Math.floor(Math.random()*COLORS.length)],
-                    fontSize: (12 + Math.random()*10) + 'px',
-                    pointerEvents: 'none', zIndex: '9999',
-                    transform: 'translate(-50%,-50%)',
-                    transition: 'none', opacity: '1', userSelect: 'none'
-                });
-                txt.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-                document.body.appendChild(txt);
-                requestAnimationFrame(() => requestAnimationFrame(() => {
-                    txt.style.transition  = 'all 0.8s ease-out';
-                    txt.style.transform   = `translate(-50%, calc(-50% - 60px))`;
-                    txt.style.opacity     = '0';
-                }));
-                setTimeout(() => txt.remove(), 900);
-            }
-
-            document.addEventListener('click', e => burst(e.clientX, e.clientY));
-        })();
-    </script>
-
-    <!-- ===== Scroll Progress Bar ===== -->
-    <div id="scroll-progress"></div>
-    <script>
-        (function() {
-            const bar = document.getElementById('scroll-progress');
-            window.addEventListener('scroll', function() {
-                const doc = document.documentElement;
-                const scrollTop = doc.scrollTop || document.body.scrollTop;
-                const scrollHeight = doc.scrollHeight - doc.clientHeight;
-                bar.style.width = (scrollTop / scrollHeight * 100) + '%';
-            }, { passive: true });
-        })();
-    </script>
-
-    <!-- ===== Mouse Cursor Trail ===== -->
-    <script>
-        (function() {
-            const TRAIL_COLORS = ['#4786d6','#7c5cbf','#e05c8a','#e07b39','#6aab6a'];
-            let colorIdx = 0;
-            let lastTrail = 0;
-
-            document.addEventListener('mousemove', function(e) {
-                const now = Date.now();
-                if (now - lastTrail < 40) return; // throttle to ~25fps
-                lastTrail = now;
-
-                const dot = document.createElement('div');
-                const color = TRAIL_COLORS[colorIdx++ % TRAIL_COLORS.length];
-                Object.assign(dot.style, {
-                    position: 'fixed',
-                    left: e.clientX + 'px',
-                    top:  e.clientY + 'px',
-                    width: '6px', height: '6px',
-                    borderRadius: '50%',
-                    background: color,
-                    pointerEvents: 'none',
-                    zIndex: '9997',
-                    transform: 'translate(-50%,-50%)',
-                    opacity: '0.7',
-                    transition: 'none'
-                });
-                document.body.appendChild(dot);
-
-                requestAnimationFrame(() => requestAnimationFrame(() => {
-                    dot.style.transition = 'all 0.5s ease-out';
-                    dot.style.width   = '2px';
-                    dot.style.height  = '2px';
-                    dot.style.opacity = '0';
-                    dot.style.transform = `translate(calc(-50% + ${(Math.random()-0.5)*16}px), calc(-50% + ${(Math.random()-0.5)*16}px))`;
-                }));
-                setTimeout(() => dot.remove(), 550);
-            });
-        })();
-    </script>
-
-    <!-- ===== Scroll Reveal (Intersection Observer) ===== -->
-    <script>
-        (function() {
-            // Add reveal class to target elements
-            const selectors = '.entry-block, .pub-entry, h1, .interest-tags';
-            document.querySelectorAll(selectors).forEach((el, i) => {
-                el.classList.add('reveal');
-                el.style.transitionDelay = (i % 4) * 0.07 + 's';
-            });
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.12 });
-
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        })();
-    </script>
-    <!-- ===== Typewriter Effect on Name ===== -->
-    <script>
-        (function() {
-            const nameLink = document.querySelector('.title h3 a');
-            if (!nameLink) return;
-            const fullText = nameLink.textContent;
-            nameLink.textContent = '';
-            nameLink.style.borderRight = '2px solid #4786d6';
-            let i = 0;
-            const timer = setInterval(() => {
-                nameLink.textContent += fullText[i++];
-                if (i >= fullText.length) {
-                    clearInterval(timer);
-                    // Blink cursor then remove it
-                    let blink = 0;
-                    const cursor = setInterval(() => {
-                        nameLink.style.borderRight = (blink++ % 2 === 0)
-                            ? '2px solid transparent'
-                            : '2px solid #4786d6';
-                        if (blink > 5) { clearInterval(cursor); nameLink.style.borderRight = 'none'; }
-                    }, 400);
-                }
-            }, 90);
-        })();
-    </script>
-
-    <!-- ===== 3D Card Tilt on Hover ===== -->
-    <script>
-        (function() {
-            function addTilt(el) {
-                el.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease';
-                el.addEventListener('mousemove', function(e) {
-                    const rect = el.getBoundingClientRect();
-                    const cx = rect.left + rect.width  / 2;
-                    const cy = rect.top  + rect.height / 2;
-                    const dx = (e.clientX - cx) / (rect.width  / 2);
-                    const dy = (e.clientY - cy) / (rect.height / 2);
-                    const rotX = -dy * 5;
-                    const rotY =  dx * 5;
-                    el.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
-                    el.style.boxShadow = `${-rotY*2}px ${rotX*2}px 24px rgba(71,134,214,0.15)`;
-                });
-                el.addEventListener('mouseleave', function() {
-                    el.style.transform = '';
-                    el.style.boxShadow = '';
-                });
-            }
-            document.querySelectorAll('.entry-block, .pub-entry').forEach(addTilt);
-        })();
-    </script>
-
-    <!-- ===== Konami Code Easter Egg (↑↑↓↓←→←→BA) ===== -->
-    <script>
-        (function() {
-            const CODE = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown',
-                          'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-            let pos = 0;
-            document.addEventListener('keydown', function(e) {
-                if (e.key === CODE[pos]) {
-                    pos++;
-                    if (pos === CODE.length) {
-                        pos = 0;
-                        fireKonami();
-                    }
-                } else { pos = 0; }
-            });
-
-            function fireKonami() {
-                const msg = document.createElement('div');
-                Object.assign(msg.style, {
-                    position: 'fixed', top: '50%', left: '50%',
-                    transform: 'translate(-50%,-50%) scale(0)',
-                    fontSize: '28px', fontWeight: '700',
-                    color: '#fff', background: 'linear-gradient(135deg,#4786d6,#7c5cbf)',
-                    padding: '18px 36px', borderRadius: '16px',
-                    zIndex: '99999', pointerEvents: 'none',
-                    boxShadow: '0 8px 32px rgba(71,134,214,0.4)',
-                    transition: 'transform 0.4s cubic-bezier(.34,1.56,.64,1)',
-                    textAlign: 'center', letterSpacing: '1px'
-                });
-                msg.innerHTML = '🎉 Konami Code Activated! 🎉<br><span style="font-size:14px;font-weight:400">You found the easter egg!</span>';
-                document.body.appendChild(msg);
-                requestAnimationFrame(() => requestAnimationFrame(() => {
-                    msg.style.transform = 'translate(-50%,-50%) scale(1)';
-                }));
-                setTimeout(() => {
-                    msg.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-                    msg.style.opacity = '0';
-                    msg.style.transform = 'translate(-50%,-60%) scale(0.8)';
-                    setTimeout(() => msg.remove(), 350);
-                }, 2500);
-
-                // Fireworks burst from random positions
-                const COLORS = ['#4786d6','#7c5cbf','#e05c8a','#e07b39','#6aab6a','#f0a500'];
-                for (let b = 0; b < 8; b++) {
-                    setTimeout(() => {
-                        const x = 80 + Math.random() * (window.innerWidth  - 160);
-                        const y = 80 + Math.random() * (window.innerHeight - 160);
-                        for (let p = 0; p < 16; p++) {
-                            const dot = document.createElement('div');
-                            const color = COLORS[Math.floor(Math.random()*COLORS.length)];
-                            Object.assign(dot.style, {
-                                position: 'fixed', left: x+'px', top: y+'px',
-                                width: '8px', height: '8px', borderRadius: '50%',
-                                background: color, pointerEvents: 'none', zIndex: '99998',
-                                transform: 'translate(-50%,-50%)', opacity: '1'
-                            });
-                            document.body.appendChild(dot);
-                            const angle = (p / 16) * Math.PI * 2;
-                            const dist  = 60 + Math.random() * 80;
-                            const dx = Math.cos(angle) * dist;
-                            const dy = Math.sin(angle) * dist;
-                            requestAnimationFrame(() => requestAnimationFrame(() => {
-                                dot.style.transition = 'all 0.8s cubic-bezier(.2,.8,.4,1)';
-                                dot.style.transform  = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
-                                dot.style.opacity    = '0';
-                                dot.style.width = '3px'; dot.style.height = '3px';
-                            }));
-                            setTimeout(() => dot.remove(), 900);
-                        }
-                    }, b * 200);
-                }
-            }
-        })();
-    </script>
-</body>
+    <footer class="site-footer">
+      <p>© 2026 Yifan Zhang <span aria-hidden="true">·</span> <span data-lang="en" lang="en">Last updated: November 2026</span><span data-lang="zh" lang="zh-CN">最近更新：2026 年 11 月</span></p>
+    </footer>
+  </body>
 </html>
